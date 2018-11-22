@@ -12,12 +12,20 @@ namespace NotizbuchOOP
 {
     public partial class Form1 : Form
     {
+
+        private List<Notizbuch.Notizbuch> notizenListe = new List<Notizbuch.Notizbuch>();
+
         public Form1()
         {
             InitializeComponent();
 
-            Notizbuch.Notizbuch notizen = new Notizbuch.Notizbuch(DateTime.Now);
+            //Deklaration des ersten Notizbuches
+            Notizbuch.Notizbuch notizen = new Notizbuch.Notizbuch(DateTime.Now, "Notizbuch");
+            this.notizenListe.Add(notizen);
 
+            //Data-Bindings
+            cb_ListenAuswahl.DataSource = notizenListe;
+            cb_ListenAuswahl.DisplayMember = "name";
         }
 
         private void Form1_Load(object sender, EventArgs e)

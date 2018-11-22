@@ -35,7 +35,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.lb_notizen = new System.Windows.Forms.ListBox();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.button6 = new System.Windows.Forms.Button();
@@ -105,14 +105,14 @@
             this.button5.Text = "Buch entfernen";
             this.button5.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // lb_notizen
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(240, 25);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(252, 121);
-            this.listBox1.TabIndex = 12;
+            this.lb_notizen.FormattingEnabled = true;
+            this.lb_notizen.Location = new System.Drawing.Point(240, 25);
+            this.lb_notizen.Name = "lb_notizen";
+            this.lb_notizen.ScrollAlwaysVisible = true;
+            this.lb_notizen.Size = new System.Drawing.Size(252, 121);
+            this.lb_notizen.TabIndex = 12;
             // 
             // numericUpDown1
             // 
@@ -149,7 +149,7 @@
             this.Controls.Add(this.button6);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.lb_notizen);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -176,7 +176,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lb_notizen;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button6;

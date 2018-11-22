@@ -9,13 +9,15 @@ namespace NotizbuchOOP.Notizbuch
 {
     class Notizbuch
     {
-        public DateTime jahr { get; set; }
+        public DateTime datum { get; set;}
         public Einkaufszettel[] einkaufzettel { get; set; }
         public EinfacheNotiz[] einfacheNotizen { get; set; }
         public Hausaufgabe[] hausaufgaben { get; set; }
-        public Notizbuch(DateTime jahr)
+        public string name { get; set; }
+        public Notizbuch(DateTime datum, string name)
         {
-            this.jahr = jahr;
+            this.datum = datum;
+            this.name = name;
         }
     }
 }
