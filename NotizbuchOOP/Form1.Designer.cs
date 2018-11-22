@@ -30,16 +30,16 @@
         {
             this.cb_ListenAuswahl = new System.Windows.Forms.ComboBox();
             this.lbl_ComboBox = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.b_Notizen = new System.Windows.Forms.Button();
+            this.b_Einkauf = new System.Windows.Forms.Button();
+            this.b_Hausaufgaben = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.lb_notizen = new System.Windows.Forms.ListBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.nud_Prio = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
-            this.button6 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.b_Suchen = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).BeginInit();
             this.SuspendLayout();
             // 
             // cb_ListenAuswahl
@@ -60,32 +60,39 @@
             this.lbl_ComboBox.TabIndex = 4;
             this.lbl_ComboBox.Text = "Notizbücher";
             // 
-            // button1
+            // b_Notizen
             // 
-            this.button1.Location = new System.Drawing.Point(12, 96);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(70, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Notizen";
-            this.button1.UseVisualStyleBackColor = true;
+            this.b_Notizen.FlatAppearance.BorderColor = System.Drawing.Color.Red;
+            this.b_Notizen.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.b_Notizen.Location = new System.Drawing.Point(12, 96);
+            this.b_Notizen.Name = "b_Notizen";
+            this.b_Notizen.Size = new System.Drawing.Size(70, 23);
+            this.b_Notizen.TabIndex = 6;
+            this.b_Notizen.Text = "Notizen";
+            this.b_Notizen.UseVisualStyleBackColor = false;
+            this.b_Notizen.Click += new System.EventHandler(this.button1_Click);
             // 
-            // button2
+            // b_Einkauf
             // 
-            this.button2.Location = new System.Drawing.Point(88, 96);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(70, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Einkauf";
-            this.button2.UseVisualStyleBackColor = true;
+            this.b_Einkauf.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.b_Einkauf.Location = new System.Drawing.Point(88, 96);
+            this.b_Einkauf.Name = "b_Einkauf";
+            this.b_Einkauf.Size = new System.Drawing.Size(70, 23);
+            this.b_Einkauf.TabIndex = 7;
+            this.b_Einkauf.Text = "Einkauf";
+            this.b_Einkauf.UseVisualStyleBackColor = true;
+            this.b_Einkauf.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button3
+            // b_Hausaufgaben
             // 
-            this.button3.Location = new System.Drawing.Point(164, 96);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(70, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Hausaufg.";
-            this.button3.UseVisualStyleBackColor = true;
+            this.b_Hausaufgaben.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.b_Hausaufgaben.Location = new System.Drawing.Point(164, 96);
+            this.b_Hausaufgaben.Name = "b_Hausaufgaben";
+            this.b_Hausaufgaben.Size = new System.Drawing.Size(70, 23);
+            this.b_Hausaufgaben.TabIndex = 8;
+            this.b_Hausaufgaben.Text = "Hausaufg.";
+            this.b_Hausaufgaben.UseVisualStyleBackColor = true;
+            this.b_Hausaufgaben.Click += new System.EventHandler(this.button3_Click);
             // 
             // button4
             // 
@@ -115,13 +122,13 @@
             this.lb_notizen.Size = new System.Drawing.Size(252, 121);
             this.lb_notizen.TabIndex = 12;
             // 
-            // numericUpDown1
+            // nud_Prio
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(46, 126);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.ReadOnly = true;
-            this.numericUpDown1.Size = new System.Drawing.Size(112, 20);
-            this.numericUpDown1.TabIndex = 13;
+            this.nud_Prio.Location = new System.Drawing.Point(46, 126);
+            this.nud_Prio.Name = "nud_Prio";
+            this.nud_Prio.ReadOnly = true;
+            this.nud_Prio.Size = new System.Drawing.Size(112, 20);
+            this.nud_Prio.TabIndex = 13;
             // 
             // label1
             // 
@@ -133,29 +140,29 @@
             this.label1.Text = "Filter";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
-            // button6
+            // b_Suchen
             // 
-            this.button6.Location = new System.Drawing.Point(164, 125);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(70, 22);
-            this.button6.TabIndex = 15;
-            this.button6.Text = "Suchen";
-            this.button6.UseVisualStyleBackColor = true;
+            this.b_Suchen.Location = new System.Drawing.Point(164, 125);
+            this.b_Suchen.Name = "b_Suchen";
+            this.b_Suchen.Size = new System.Drawing.Size(70, 22);
+            this.b_Suchen.TabIndex = 15;
+            this.b_Suchen.Text = "Suchen";
+            this.b_Suchen.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 363);
-            this.Controls.Add(this.button6);
+            this.Controls.Add(this.b_Suchen);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.nud_Prio);
             this.Controls.Add(this.lb_notizen);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.b_Hausaufgaben);
+            this.Controls.Add(this.b_Einkauf);
+            this.Controls.Add(this.b_Notizen);
             this.Controls.Add(this.lbl_ComboBox);
             this.Controls.Add(this.cb_ListenAuswahl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -163,7 +170,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -172,15 +179,15 @@
         #endregion
         private System.Windows.Forms.ComboBox cb_ListenAuswahl;
         private System.Windows.Forms.Label lbl_ComboBox;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button b_Notizen;
+        private System.Windows.Forms.Button b_Einkauf;
+        private System.Windows.Forms.Button b_Hausaufgaben;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.ListBox lb_notizen;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown nud_Prio;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button b_Suchen;
     }
 }
 
