@@ -49,6 +49,7 @@
             this.cb_ListenAuswahl.Name = "cb_ListenAuswahl";
             this.cb_ListenAuswahl.Size = new System.Drawing.Size(222, 21);
             this.cb_ListenAuswahl.TabIndex = 2;
+            this.cb_ListenAuswahl.SelectedIndexChanged += new System.EventHandler(this.cb_ListenAuswahl_SelectedIndexChanged);
             // 
             // lbl_ComboBox
             // 

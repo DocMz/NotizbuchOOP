@@ -12,8 +12,8 @@ namespace NotizbuchOOP
 {
     public partial class Form1 : Form
     {
-
         private List<Notizbuch.Notizbuch> notizenListe = new List<Notizbuch.Notizbuch>();
+        private Notizbuch.Notizbuch currentNotizbuch;
 
         public Form1()
         {
@@ -50,6 +50,11 @@ namespace NotizbuchOOP
         private void button4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void cb_ListenAuswahl_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.currentNotizbuch = notizenListe[cb_ListenAuswahl.SelectedIndex];
         }
     }
 }
