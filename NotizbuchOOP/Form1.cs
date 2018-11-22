@@ -16,11 +16,8 @@ namespace NotizbuchOOP
         {
             InitializeComponent();
 
-            var mi_NotizHinzufügen = new MenuItem("Notiz hinzufügen", test, Shortcut.CtrlA);
-            var mi_NotizLöschen = new MenuItem("Notiz löschen", test, Shortcut.CtrlD);
+            Notizbuch.Notizbuch notizen = new Notizbuch.Notizbuch(DateTime.Now);
 
-
-            lb_Notizen.ContextMenu = new ContextMenu(new MenuItem[] {mi_NotizHinzufügen, mi_NotizLöschen });
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -38,6 +35,11 @@ namespace NotizbuchOOP
         }
 
         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
         {
 
         }

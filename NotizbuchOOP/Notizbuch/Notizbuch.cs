@@ -13,5 +13,9 @@ namespace NotizbuchOOP.Notizbuch
         public Einkaufszettel[] einkaufzettel { get; set; }
         public EinfacheNotiz[] einfacheNotizen { get; set; }
         public Hausaufgabe[] hausaufgaben { get; set; }
+        public Notizbuch(DateTime jahr)
+        {
+            this.jahr = jahr;
+        }
     }
 }
