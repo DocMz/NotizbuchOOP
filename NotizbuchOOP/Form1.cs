@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NotizbuchOOP.Notizbuch.Notizen;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,7 +31,9 @@ namespace NotizbuchOOP
             cb_ListenAuswahl.DataSource = notizenListe;
             cb_ListenAuswahl.DisplayMember = "name";
 
-            lb_notizen.DataSource = this.currentNotizbuch.einfacheNotizen;
+            lb_notizen.DataSource = currentNotizbuch.einfacheNotizen;
+            lb_notizen.DisplayMember = "titel";
+
 
             lb_notizen.ContextMenuStrip = cm_notizen;
         }
