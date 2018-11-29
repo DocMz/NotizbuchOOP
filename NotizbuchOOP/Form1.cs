@@ -29,6 +29,8 @@ namespace NotizbuchOOP
             //Data-Bindings
             cb_ListenAuswahl.DataSource = notizenListe;
             cb_ListenAuswahl.DisplayMember = "name";
+
+            lb_notizen.ContextMenuStrip = cm_notizen;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -76,6 +78,16 @@ namespace NotizbuchOOP
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void contextMenuStrip1_Opening_1(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void notizHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
         }

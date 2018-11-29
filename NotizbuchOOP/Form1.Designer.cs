@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.cb_ListenAuswahl = new System.Windows.Forms.ComboBox();
             this.lbl_ComboBox = new System.Windows.Forms.Label();
             this.b_Notizen = new System.Windows.Forms.Button();
@@ -39,12 +40,18 @@
             this.nud_Prio = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.b_Suchen = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.cm_notizen = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.notizHinzufügenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notizLöschenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            this.cm_notizen.SuspendLayout();
             this.SuspendLayout();
             // 
             // cb_ListenAuswahl
@@ -154,15 +161,6 @@
             this.b_Suchen.Text = "Suchen";
             this.b_Suchen.UseVisualStyleBackColor = true;
             // 
-            // groupBox1
-            // 
-            this.groupBox1.Location = new System.Drawing.Point(12, 153);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(222, 198);
-            this.groupBox1.TabIndex = 16;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(240, 208);
@@ -198,16 +196,56 @@
             this.label3.TabIndex = 20;
             this.label3.Text = "Inhalt";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(14, 327);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(220, 23);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "Speichern";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // trackBar1
+            // 
+            this.trackBar1.Location = new System.Drawing.Point(189, 208);
+            this.trackBar1.Maximum = 5;
+            this.trackBar1.Name = "trackBar1";
+            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trackBar1.Size = new System.Drawing.Size(45, 113);
+            this.trackBar1.TabIndex = 22;
+            // 
+            // cm_notizen
+            // 
+            this.cm_notizen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.notizHinzufügenToolStripMenuItem,
+            this.notizLöschenToolStripMenuItem});
+            this.cm_notizen.Name = "cm_notizen";
+            this.cm_notizen.Size = new System.Drawing.Size(137, 48);
+            // 
+            // notizHinzufügenToolStripMenuItem
+            // 
+            this.notizHinzufügenToolStripMenuItem.Name = "notizHinzufügenToolStripMenuItem";
+            this.notizHinzufügenToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.notizHinzufügenToolStripMenuItem.Text = "Hinzufügen";
+            this.notizHinzufügenToolStripMenuItem.Click += new System.EventHandler(this.notizHinzufügenToolStripMenuItem_Click);
+            // 
+            // notizLöschenToolStripMenuItem
+            // 
+            this.notizLöschenToolStripMenuItem.Name = "notizLöschenToolStripMenuItem";
+            this.notizLöschenToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.notizLöschenToolStripMenuItem.Text = "Löschen";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 363);
+            this.Controls.Add(this.trackBar1);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.b_Suchen);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nud_Prio);
@@ -225,6 +263,8 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            this.cm_notizen.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -242,11 +282,15 @@
         private System.Windows.Forms.NumericUpDown nud_Prio;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button b_Suchen;
-        private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.ContextMenuStrip cm_notizen;
+        private System.Windows.Forms.ToolStripMenuItem notizHinzufügenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem notizLöschenToolStripMenuItem;
     }
 }
 
