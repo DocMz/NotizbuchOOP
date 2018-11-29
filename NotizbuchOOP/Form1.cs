@@ -63,25 +63,21 @@ namespace NotizbuchOOP
         private void button1_Click(object sender, EventArgs e)
         {
             this.notizArt = 0;
-            b_Notizen.Enabled = false;
-            b_Einkauf.Enabled = true;
-            b_Hausaufgaben.Enabled = true;
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.notizArt = 1;
-            b_Notizen.Enabled = true;
-            b_Einkauf.Enabled = false;
-            b_Hausaufgaben.Enabled = true;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             this.notizArt = 2;
-            b_Notizen.Enabled = true;
-            b_Einkauf.Enabled = true;
-            b_Hausaufgaben.Enabled = false;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
