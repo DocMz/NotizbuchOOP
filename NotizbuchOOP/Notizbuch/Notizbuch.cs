@@ -28,7 +28,7 @@ namespace NotizbuchOOP.Notizbuch
         {
             this.einfacheNotizen.Add(new EinfacheNotiz(DateTime.Now, title));
         }
-        public void einfacheNotizRemove(int index)
+        public void einfacheNotizRemove(int index) //Löscht Notiz aus der List an dem bestimmten Index
         {
             this.einfacheNotizen.RemoveAt(index);
         }
@@ -37,6 +37,18 @@ namespace NotizbuchOOP.Notizbuch
             this.einfacheNotizen.ResetBindings();
             this.hausaufgaben.ResetBindings();
             this.einkaufzettel.ResetBindings();
+        }
+        public BindingList<EinfacheNotiz> einfacheNotizFilter(int prio)
+        {
+            BindingList<EinfacheNotiz> liste = new BindingList<EinfacheNotiz>();
+            foreach(EinfacheNotiz x in einfacheNotizen)
+            {
+                if(x.prio == prio)
+                {
+                    liste.Add(x);
+                }
+            }
+            return liste;
         }
     }
 }

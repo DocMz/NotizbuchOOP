@@ -11,6 +11,7 @@ namespace NotizbuchOOP.Notizbuch.Notizen
         public DateTime datum { get; set; }
         public string titel { get; set; }
         public string[] inhalt { get; set; }
+        public int prio { get; set; }
         public EinfacheNotiz(DateTime date, string title)
         {
             this.datum = date;
