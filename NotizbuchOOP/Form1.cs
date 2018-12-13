@@ -37,7 +37,29 @@ namespace NotizbuchOOP
             cb_ListenAuswahl.DataSource = notizenListe;
             cb_ListenAuswahl.DisplayMember = "name";
 
-            lb_notizen.DataSource = notizenListe[currentNotizbuch].einfacheNotizen;
+            if(this.notizArt == 0)
+            {
+                lb_notizen.DataSource = notizenListe[currentNotizbuch].einfacheNotizen;
+                if(lb_notizen.SelectedIndex != -1)
+                {
+                    tb_titel.Text = this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].titel;
+                }
+            }
+            else if(this.notizArt == 1) {
+                lb_notizen.DataSource = notizenListe[currentNotizbuch].einkaufzettel;
+                if (lb_notizen.SelectedIndex != -1)
+                {
+                    tb_titel.Text = this.notizenListe[currentNotizbuch].einkaufzettel[lb_notizen.SelectedIndex].titel;
+                }
+            }
+            else if(this.notizArt == 2) {
+                lb_notizen.DataSource = notizenListe[currentNotizbuch].hausaufgaben;
+                if (lb_notizen.SelectedIndex != -1)
+                {
+                    tb_titel.Text = this.notizenListe[currentNotizbuch].hausaufgaben[lb_notizen.SelectedIndex].titel;
+                }
+            }
+
             lb_notizen.DisplayMember = "titel";
 
             lb_notizen.ContextMenuStrip = cm_notizen;
@@ -67,16 +89,19 @@ namespace NotizbuchOOP
         private void button1_Click(object sender, EventArgs e)
         {
             this.notizArt = 0;
+            BindingUpdate();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             this.notizArt = 1;
+            BindingUpdate();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             this.notizArt = 2;
+            BindingUpdate();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -95,7 +120,15 @@ namespace NotizbuchOOP
 
         private void lb_notizen_SelectedIndexChanged(object sender, EventArgs e)
         {
+            BindingUpdate();
+        }
 
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].titel = tb_titel.Text;
+            this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].inhalt = rtb_inhalt.Lines;
+            this.notizenListe[currentNotizbuch].updateListings();
+            BindingUpdate();
         }
     }
 }

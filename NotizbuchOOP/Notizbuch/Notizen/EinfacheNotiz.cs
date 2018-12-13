@@ -8,12 +8,13 @@ namespace NotizbuchOOP.Notizbuch.Notizen
 {
     public class EinfacheNotiz
     {
-        public DateTime Datum { get; set; }
-        public string Titel { get; set; }
+        public DateTime datum { get; set; }
+        public string titel { get; set; }
+        public string[] inhalt { get; set; }
         public EinfacheNotiz(DateTime date, string title)
         {
-            this.Datum = date;
-            this.Titel = title;
+            this.datum = date;
+            this.titel = title;
         }
     }
 }

@@ -28,5 +28,11 @@ namespace NotizbuchOOP.Notizbuch
         {
             this.einfacheNotizen.Add(new EinfacheNotiz(DateTime.Now, title));
         }
+        public void updateListings() //Aktualisiert die Bindings Manuell
+        {
+            this.einfacheNotizen.ResetBindings();
+            this.hausaufgaben.ResetBindings();
+            this.einkaufzettel.ResetBindings();
+        }
     }
 }

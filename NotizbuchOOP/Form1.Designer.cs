@@ -40,8 +40,8 @@
             this.nud_Prio = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.b_Suchen = new System.Windows.Forms.Button();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.rtb_inhalt = new System.Windows.Forms.RichTextBox();
+            this.tb_titel = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
@@ -162,22 +162,22 @@
             this.b_Suchen.Text = "Suchen";
             this.b_Suchen.UseVisualStyleBackColor = true;
             // 
-            // richTextBox1
+            // rtb_inhalt
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(240, 208);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.richTextBox1.Size = new System.Drawing.Size(252, 143);
-            this.richTextBox1.TabIndex = 17;
-            this.richTextBox1.Text = "";
+            this.rtb_inhalt.Location = new System.Drawing.Point(240, 208);
+            this.rtb_inhalt.Name = "rtb_inhalt";
+            this.rtb_inhalt.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.rtb_inhalt.Size = new System.Drawing.Size(252, 143);
+            this.rtb_inhalt.TabIndex = 17;
+            this.rtb_inhalt.Text = "";
             // 
-            // textBox1
+            // tb_titel
             // 
-            this.textBox1.Location = new System.Drawing.Point(241, 169);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(251, 20);
-            this.textBox1.TabIndex = 18;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.tb_titel.Location = new System.Drawing.Point(241, 169);
+            this.tb_titel.Name = "tb_titel";
+            this.tb_titel.Size = new System.Drawing.Size(251, 20);
+            this.tb_titel.TabIndex = 18;
+            this.tb_titel.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
             // 
@@ -205,6 +205,7 @@
             this.button1.TabIndex = 21;
             this.button1.Text = "Speichern";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // trackBar1
             // 
@@ -245,8 +246,8 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.tb_titel);
+            this.Controls.Add(this.rtb_inhalt);
             this.Controls.Add(this.b_Suchen);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.nud_Prio);
@@ -283,8 +284,8 @@
         private System.Windows.Forms.NumericUpDown nud_Prio;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button b_Suchen;
-        private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.RichTextBox rtb_inhalt;
+        private System.Windows.Forms.TextBox tb_titel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button1;
