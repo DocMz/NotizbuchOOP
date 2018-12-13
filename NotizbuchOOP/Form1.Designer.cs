@@ -133,6 +133,7 @@
             this.lb_notizen.ScrollAlwaysVisible = true;
             this.lb_notizen.Size = new System.Drawing.Size(252, 121);
             this.lb_notizen.TabIndex = 12;
+            this.lb_notizen.SelectedIndexChanged += new System.EventHandler(this.lb_notizen_SelectedIndexChanged);
             // 
             // nud_Prio
             // 

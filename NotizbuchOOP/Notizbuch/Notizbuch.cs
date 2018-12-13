@@ -23,12 +23,6 @@ namespace NotizbuchOOP.Notizbuch
             this.einfacheNotizen = new BindingList<EinfacheNotiz>();
             this.einkaufzettel = new BindingList<Einkaufszettel>();
             this.hausaufgaben = new BindingList<Hausaufgabe>();
-
-            einfacheNotizen.Add(new EinfacheNotiz(DateTime.Now, "test"));
-            einfacheNotizen.Add(new EinfacheNotiz(DateTime.Now, "test"));
-            einfacheNotizen.Add(new EinfacheNotiz(DateTime.Now, "test"));
-            einfacheNotizen.Add(new EinfacheNotiz(DateTime.Now, "test"));
-
         }
         public void einfacheNotizAdd(string title)
         {

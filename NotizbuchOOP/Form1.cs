@@ -14,7 +14,7 @@ namespace NotizbuchOOP
     public partial class Form1 : Form
     {
         private List<Notizbuch.Notizbuch> notizenListe = new List<Notizbuch.Notizbuch>();
-        private Notizbuch.Notizbuch currentNotizbuch;
+        private int currentNotizbuch;
 
         //0 = Notizen, 1 = Einkaufsliste, 2 = Hausaufgaben
         private int notizArt = 0;
@@ -25,15 +25,20 @@ namespace NotizbuchOOP
 
             //Deklaration des ersten Notizbuches
             Notizbuch.Notizbuch notizen = new Notizbuch.Notizbuch(DateTime.Now, "Notizbuch");
+            Notizbuch.Notizbuch notizen2 = new Notizbuch.Notizbuch(DateTime.Now, "Notizbuch2");
             this.notizenListe.Add(notizen);
+            this.notizenListe.Add(notizen2);
 
+            BindingUpdate();
+        }
+        public void BindingUpdate()
+        {
             //Data-Bindings
             cb_ListenAuswahl.DataSource = notizenListe;
             cb_ListenAuswahl.DisplayMember = "name";
 
-            lb_notizen.DataSource = currentNotizbuch.einfacheNotizen;
+            lb_notizen.DataSource = notizenListe[currentNotizbuch].einfacheNotizen;
             lb_notizen.DisplayMember = "titel";
-
 
             lb_notizen.ContextMenuStrip = cm_notizen;
         }
@@ -55,7 +60,8 @@ namespace NotizbuchOOP
 
         private void cb_ListenAuswahl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.currentNotizbuch = notizenListe[cb_ListenAuswahl.SelectedIndex];
+            this.currentNotizbuch = cb_ListenAuswahl.SelectedIndex;
+            BindingUpdate();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -80,11 +86,16 @@ namespace NotizbuchOOP
         private void notizHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int count = 0;
-            if(currentNotizbuch != null && currentNotizbuch.einfacheNotizen != null)
+            if(notizenListe[currentNotizbuch] != null && notizenListe[currentNotizbuch].einfacheNotizen != null)
             {
-                count = currentNotizbuch.einfacheNotizen.Count();
+                count = notizenListe[currentNotizbuch].einfacheNotizen.Count();
             }
-            currentNotizbuch.einfacheNotizAdd("Notiz" + count);
+            notizenListe[currentNotizbuch].einfacheNotizAdd("Notiz" + count);
+        }
+
+        private void lb_notizen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
