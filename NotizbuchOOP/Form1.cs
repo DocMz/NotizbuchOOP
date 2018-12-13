@@ -133,5 +133,13 @@ namespace NotizbuchOOP
             this.notizenListe[currentNotizbuch].updateListings();
             BindingUpdate();
         }
+
+        private void notizLöschenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (notizenListe[currentNotizbuch] != null && notizenListe[currentNotizbuch].einfacheNotizen != null)
+            {
+                notizenListe[currentNotizbuch].einfacheNotizRemove(lb_notizen.SelectedIndex);
+            }
+        }
     }
 }

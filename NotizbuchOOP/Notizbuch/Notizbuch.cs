@@ -28,6 +28,10 @@ namespace NotizbuchOOP.Notizbuch
         {
             this.einfacheNotizen.Add(new EinfacheNotiz(DateTime.Now, title));
         }
+        public void einfacheNotizRemove(int index)
+        {
+            this.einfacheNotizen.RemoveAt(index);
+        }
         public void updateListings() //Aktualisiert die Bindings Manuell
         {
             this.einfacheNotizen.ResetBindings();

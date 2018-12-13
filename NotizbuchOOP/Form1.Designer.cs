@@ -222,7 +222,7 @@
             this.notizHinzufügenToolStripMenuItem,
             this.notizLöschenToolStripMenuItem});
             this.cm_notizen.Name = "cm_notizen";
-            this.cm_notizen.Size = new System.Drawing.Size(137, 48);
+            this.cm_notizen.Size = new System.Drawing.Size(153, 70);
             // 
             // notizHinzufügenToolStripMenuItem
             // 
@@ -234,8 +234,9 @@
             // notizLöschenToolStripMenuItem
             // 
             this.notizLöschenToolStripMenuItem.Name = "notizLöschenToolStripMenuItem";
-            this.notizLöschenToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.notizLöschenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.notizLöschenToolStripMenuItem.Text = "Löschen";
+            this.notizLöschenToolStripMenuItem.Click += new System.EventHandler(this.notizLöschenToolStripMenuItem_Click);
             // 
             // Form1
             // 
