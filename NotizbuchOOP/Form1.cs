@@ -43,6 +43,7 @@ namespace NotizbuchOOP
                 if(lb_notizen.SelectedIndex != -1)
                 {
                     tb_titel.Text = this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].titel;
+                    rtb_inhalt.Lines = this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].inhalt;
                 }
             }
             else if(this.notizArt == 1) {
@@ -50,6 +51,7 @@ namespace NotizbuchOOP
                 if (lb_notizen.SelectedIndex != -1)
                 {
                     tb_titel.Text = this.notizenListe[currentNotizbuch].einkaufzettel[lb_notizen.SelectedIndex].titel;
+                    //rtb_inhalt.Lines = this.notizenListe[currentNotizbuch].einkaufzettel[lb_notizen.SelectedIndex].inhalt;
                 }
             }
             else if(this.notizArt == 2) {
@@ -57,6 +59,7 @@ namespace NotizbuchOOP
                 if (lb_notizen.SelectedIndex != -1)
                 {
                     tb_titel.Text = this.notizenListe[currentNotizbuch].hausaufgaben[lb_notizen.SelectedIndex].titel;
+                    //rtb_inhalt.Lines = this.notizenListe[currentNotizbuch].hausaufgaben[lb_notizen.SelectedIndex].inhalt;
                 }
             }
 
