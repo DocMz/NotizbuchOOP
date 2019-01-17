@@ -44,13 +44,13 @@
             this.tb_titel = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
+            this.b_speichern = new System.Windows.Forms.Button();
+            this.tbar_prio = new System.Windows.Forms.TrackBar();
             this.cm_notizen = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.notizHinzufügenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notizLöschenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbar_prio)).BeginInit();
             this.cm_notizen.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -161,6 +161,7 @@
             this.b_Suchen.TabIndex = 15;
             this.b_Suchen.Text = "Suchen";
             this.b_Suchen.UseVisualStyleBackColor = true;
+            this.b_Suchen.Click += new System.EventHandler(this.b_Suchen_Click);
             // 
             // rtb_inhalt
             // 
@@ -197,24 +198,24 @@
             this.label3.TabIndex = 20;
             this.label3.Text = "Inhalt";
             // 
-            // button1
+            // b_speichern
             // 
-            this.button1.Location = new System.Drawing.Point(14, 327);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(220, 23);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Speichern";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.b_speichern.Location = new System.Drawing.Point(14, 327);
+            this.b_speichern.Name = "b_speichern";
+            this.b_speichern.Size = new System.Drawing.Size(220, 23);
+            this.b_speichern.TabIndex = 21;
+            this.b_speichern.Text = "Speichern";
+            this.b_speichern.UseVisualStyleBackColor = true;
+            this.b_speichern.Click += new System.EventHandler(this.b_speichern_click);
             // 
-            // trackBar1
+            // tbar_prio
             // 
-            this.trackBar1.Location = new System.Drawing.Point(189, 208);
-            this.trackBar1.Maximum = 5;
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(45, 113);
-            this.trackBar1.TabIndex = 22;
+            this.tbar_prio.Location = new System.Drawing.Point(189, 208);
+            this.tbar_prio.Maximum = 5;
+            this.tbar_prio.Name = "tbar_prio";
+            this.tbar_prio.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.tbar_prio.Size = new System.Drawing.Size(45, 113);
+            this.tbar_prio.TabIndex = 22;
             // 
             // cm_notizen
             // 
@@ -222,7 +223,7 @@
             this.notizHinzufügenToolStripMenuItem,
             this.notizLöschenToolStripMenuItem});
             this.cm_notizen.Name = "cm_notizen";
-            this.cm_notizen.Size = new System.Drawing.Size(153, 70);
+            this.cm_notizen.Size = new System.Drawing.Size(137, 48);
             // 
             // notizHinzufügenToolStripMenuItem
             // 
@@ -234,7 +235,7 @@
             // notizLöschenToolStripMenuItem
             // 
             this.notizLöschenToolStripMenuItem.Name = "notizLöschenToolStripMenuItem";
-            this.notizLöschenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.notizLöschenToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.notizLöschenToolStripMenuItem.Text = "Löschen";
             this.notizLöschenToolStripMenuItem.Click += new System.EventHandler(this.notizLöschenToolStripMenuItem_Click);
             // 
@@ -243,8 +244,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 363);
-            this.Controls.Add(this.trackBar1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.tbar_prio);
+            this.Controls.Add(this.b_speichern);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tb_titel);
@@ -266,7 +267,7 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tbar_prio)).EndInit();
             this.cm_notizen.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -289,8 +290,8 @@
         private System.Windows.Forms.TextBox tb_titel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TrackBar trackBar1;
+        private System.Windows.Forms.Button b_speichern;
+        private System.Windows.Forms.TrackBar tbar_prio;
         private System.Windows.Forms.ContextMenuStrip cm_notizen;
         private System.Windows.Forms.ToolStripMenuItem notizHinzufügenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem notizLöschenToolStripMenuItem;

@@ -24,7 +24,7 @@ namespace NotizbuchOOP.Notizbuch
             this.einkaufzettel = new BindingList<Einkaufszettel>();
             this.hausaufgaben = new BindingList<Hausaufgabe>();
         }
-        public void einfacheNotizAdd(string title)
+        public void einfacheNotizAdd(string title) //Fügt eine einfache Notiz hinzu
         {
             this.einfacheNotizen.Add(new EinfacheNotiz(DateTime.Now, title));
         }
@@ -41,7 +41,7 @@ namespace NotizbuchOOP.Notizbuch
         public BindingList<EinfacheNotiz> einfacheNotizFilter(int prio)
         {
             BindingList<EinfacheNotiz> liste = new BindingList<EinfacheNotiz>();
-            foreach(EinfacheNotiz x in einfacheNotizen)
+            foreach(EinfacheNotiz x in this.einfacheNotizen)
             {
                 if(x.prio == prio)
                 {
