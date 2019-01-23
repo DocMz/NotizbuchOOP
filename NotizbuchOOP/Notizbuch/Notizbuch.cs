@@ -14,7 +14,7 @@ namespace NotizbuchOOP.Notizbuch
         public BindingList<Einkaufszettel> einkaufzettel { get; set; }
         public BindingList<EinfacheNotiz> einfacheNotizen { get; set; }
         public BindingList<Hausaufgabe> hausaufgaben { get; set; }
-        public string name { get; set; }
+        public string name { get; set; } //Notizbuchname
         public Notizbuch(DateTime datum, string name)
         {
             this.datum = datum;
@@ -38,17 +38,16 @@ namespace NotizbuchOOP.Notizbuch
             this.hausaufgaben.ResetBindings();
             this.einkaufzettel.ResetBindings();
         }
-        public BindingList<EinfacheNotiz> einfacheNotizFilter(int prio)
+        public IEnumerable<EinfacheNotiz> einfacheNotizFilter(int prio)
         {
-            BindingList<EinfacheNotiz> liste = new BindingList<EinfacheNotiz>();
-            foreach(EinfacheNotiz x in this.einfacheNotizen)
+            if (prio != 0)
             {
-                if(x.prio == prio)
-                {
-                    liste.Add(x);
-                }
+                IEnumerable<EinfacheNotiz> liste = new BindingList<EinfacheNotiz>();
+                return liste = einfacheNotizen.Where(x => x.prio == prio);
+            } else
+            {
+                return null;
             }
-            return liste;
         }
     }
 }
