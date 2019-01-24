@@ -48,10 +48,13 @@ namespace NotizbuchOOP
             }
             else if(this.notizArt == 1) { //Einkaufszettel
                 lb_notizen.DataSource = notizenListe[currentNotizbuch].einkaufzettel;
-                if (lb_notizen.SelectedIndex != -1)
+                if (lb_notizen.SelectedIndex >= 0)
                 {
-                    tb_titel.Text = this.notizenListe[currentNotizbuch].einkaufzettel[lb_notizen.SelectedIndex].titel;
-                    //rtb_inhalt.Lines = this.notizenListe[currentNotizbuch].einkaufzettel[lb_notizen.SelectedIndex].inhalt;
+                    var selectedItem = this.notizenListe[currentNotizbuch].hausaufgaben.Select(p => (Hausaufgabe)lb_notizen.SelectedItem).FirstOrDefault();
+                    tb_titel.Text = selectedItem.titel;
+                    rtb_inhalt.Lines = selectedItem.inhalt;
+                    tb_ablauf.Text = selectedItem.datum.ToString();
+                    tb_fach.Text = selectedItem.fach;
                 }
                 einkaufslisteRender();
             }
@@ -117,12 +120,21 @@ namespace NotizbuchOOP
         }
         private void notizHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int count = 0;
-            if(notizenListe[currentNotizbuch] != null && notizenListe[currentNotizbuch].einfacheNotizen != null)
+            if (notizenListe[currentNotizbuch] != null)
             {
-                count = notizenListe[currentNotizbuch].einfacheNotizen.Count();
+                if(notizArt == 0 ||notizArt == 3)
+                {
+                    int count = 0;
+                    if(notizenListe[currentNotizbuch].einfacheNotizen != null)
+                    {
+                        count = notizenListe[currentNotizbuch].einfacheNotizen.Count();
+                    }
+                    notizenListe[currentNotizbuch].einfacheNotizAdd("Notiz" + count);
+                } else if (notizArt == 2)
+                {
+
+                }
             }
-            notizenListe[currentNotizbuch].einfacheNotizAdd("Notiz" + count);
         }
 
         private void lb_notizen_SelectedIndexChanged(object sender, EventArgs e)
@@ -149,7 +161,6 @@ namespace NotizbuchOOP
 
         private void b_speichern_click(object sender, EventArgs e) //Speicherung
         {
-
             if (this.notizArt == 0 || this.notizArt == 3)
             {
                 var selectedItem = this.notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
@@ -163,16 +174,10 @@ namespace NotizbuchOOP
             {
                 var selectedItem = this.notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
                 int index = this.notizenListe[currentNotizbuch].einfacheNotizen.IndexOf(selectedItem);
-
-                this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].titel = tb_titel.Text;
-                this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].inhalt = rtb_inhalt.Lines;
             } else if (this.notizArt == 2)
             {
                 var selectedItem = this.notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
                 int index = this.notizenListe[currentNotizbuch].einfacheNotizen.IndexOf(selectedItem);
-
-                this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].titel = tb_titel.Text;
-                this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].inhalt = rtb_inhalt.Lines;
             }
             this.notizenListe[currentNotizbuch].updateListings();
             BindingUpdate();
@@ -210,7 +215,7 @@ namespace NotizbuchOOP
         }
         private void notizenRender()
         {
-            b_Suchen.Enabled = true; //Suchknopf ausschalten
+            b_Suchen.Enabled = true; 
             l_datum.Text = "Datum";
             tb_fach.Enabled = false;
             nud_Prio.Enabled = true;
@@ -218,7 +223,7 @@ namespace NotizbuchOOP
         }
         private void hausaufgabenRender()
         {
-            b_Suchen.Enabled = false; //Suchknopf ausschalten
+            b_Suchen.Enabled = false; 
             l_datum.Text = "Fälligkeit";
             tb_fach.Enabled = true;
             nud_Prio.Enabled = false;
@@ -226,7 +231,7 @@ namespace NotizbuchOOP
         }
         private void einkaufslisteRender()
         {
-            b_Suchen.Enabled = false; //Suchknopf ausschalten
+            b_Suchen.Enabled = false; 
             l_datum.Text = "Datum";
             tb_fach.Enabled = false;
             nud_Prio.Enabled = false;
