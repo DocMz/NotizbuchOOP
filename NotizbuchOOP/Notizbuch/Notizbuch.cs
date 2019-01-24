@@ -28,19 +28,9 @@ namespace NotizbuchOOP.Notizbuch
         {
             this.einfacheNotizen.Add(new EinfacheNotiz(DateTime.Now, title));
         }
-        public void einfacheNotizRemove(int index) //Löscht Notiz aus der List an dem bestimmten Index
+        public void einfacheNotizRemove(EinfacheNotiz item) //Löscht Notiz aus der List an dem bestimmten Index
         {
-            if(index >= 0)
-            {
-                this.einfacheNotizen.RemoveAt(index);
-
-            }
-        }
-        public void updateListings() //Aktualisiert die Bindings Manuell
-        {
-            this.einfacheNotizen.ResetBindings();
-            this.hausaufgaben.ResetBindings();
-            this.einkaufzettel.ResetBindings();
+            this.einfacheNotizen.Remove(item);
         }
         public IEnumerable<EinfacheNotiz> einfacheNotizFilter(int prio)
         {
@@ -48,10 +38,27 @@ namespace NotizbuchOOP.Notizbuch
             {
                 IEnumerable<EinfacheNotiz> liste = new BindingList<EinfacheNotiz>();
                 return liste = einfacheNotizen.Where(x => x.prio == prio);
-            } else
+            }
+            else
             {
                 return null;
             }
         }
+        public void hausaufgabeAdd(string titel, string fach, DateTime ablauf)
+        {
+            this.hausaufgaben.Add(new Hausaufgabe(ablauf, titel, fach));
+        }
+        public void hausaufgabenRemove(Hausaufgabe item)
+        {
+            this.hausaufgaben.Remove(item);
+        }
+        public void updateListings() //Aktualisiert die Bindings Manuell
+        {
+            this.einfacheNotizen.ResetBindings();
+            this.hausaufgaben.ResetBindings();
+            this.einkaufzettel.ResetBindings();
+        }
+        
+        
     }
 }

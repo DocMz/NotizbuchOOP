@@ -10,10 +10,12 @@ namespace NotizbuchOOP.Notizbuch.Notizen
     {
         public DateTime datum { get ; set ;}
         public string titel { get; set; }
-        public Hausaufgabe(DateTime datum, string title)
+        public string fach { get; set; }
+        public Hausaufgabe(DateTime datum, string title, string fach)
         {
             this.datum = datum;
             this.titel = title;
+            this.fach = fach;
         }
     }
 }

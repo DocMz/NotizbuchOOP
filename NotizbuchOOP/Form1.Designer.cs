@@ -50,6 +50,10 @@
             this.notizHinzufügenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notizLöschenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label4 = new System.Windows.Forms.Label();
+            this.tb_ablauf = new System.Windows.Forms.TextBox();
+            this.l_datum = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tb_fach = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbar_prio)).BeginInit();
             this.cm_notizen.SuspendLayout();
@@ -115,7 +119,6 @@
             this.button4.TabIndex = 9;
             this.button4.Text = "Buch hinzufügen";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -152,7 +155,6 @@
             this.label1.Size = new System.Drawing.Size(29, 13);
             this.label1.TabIndex = 14;
             this.label1.Text = "Filter";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // b_Suchen
             // 
@@ -175,7 +177,7 @@
             // 
             // tb_titel
             // 
-            this.tb_titel.Location = new System.Drawing.Point(241, 169);
+            this.tb_titel.Location = new System.Drawing.Point(240, 169);
             this.tb_titel.Name = "tb_titel";
             this.tb_titel.Size = new System.Drawing.Size(251, 20);
             this.tb_titel.TabIndex = 18;
@@ -212,11 +214,11 @@
             // tbar_prio
             // 
             this.tbar_prio.LargeChange = 3;
-            this.tbar_prio.Location = new System.Drawing.Point(189, 208);
+            this.tbar_prio.Location = new System.Drawing.Point(14, 169);
             this.tbar_prio.Maximum = 3;
             this.tbar_prio.Name = "tbar_prio";
             this.tbar_prio.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.tbar_prio.Size = new System.Drawing.Size(45, 113);
+            this.tbar_prio.Size = new System.Drawing.Size(45, 152);
             this.tbar_prio.TabIndex = 22;
             // 
             // cm_notizen
@@ -245,17 +247,53 @@
             // 
             this.label4.AutoSize = true;
             this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.label4.Location = new System.Drawing.Point(186, 192);
+            this.label4.Location = new System.Drawing.Point(11, 153);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(42, 13);
             this.label4.TabIndex = 23;
             this.label4.Text = "Priorität";
+            // 
+            // tb_ablauf
+            // 
+            this.tb_ablauf.Location = new System.Drawing.Point(164, 169);
+            this.tb_ablauf.Name = "tb_ablauf";
+            this.tb_ablauf.Size = new System.Drawing.Size(70, 20);
+            this.tb_ablauf.TabIndex = 24;
+            // 
+            // l_datum
+            // 
+            this.l_datum.AutoSize = true;
+            this.l_datum.Location = new System.Drawing.Point(161, 153);
+            this.l_datum.Name = "l_datum";
+            this.l_datum.Size = new System.Drawing.Size(48, 13);
+            this.l_datum.TabIndex = 25;
+            this.l_datum.Text = "Fälligkeit";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(85, 153);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.TabIndex = 27;
+            this.label6.Text = "Fach";
+            // 
+            // tb_fach
+            // 
+            this.tb_fach.Location = new System.Drawing.Point(88, 169);
+            this.tb_fach.Name = "tb_fach";
+            this.tb_fach.Size = new System.Drawing.Size(70, 20);
+            this.tb_fach.TabIndex = 26;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 363);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.tb_fach);
+            this.Controls.Add(this.l_datum);
+            this.Controls.Add(this.tb_ablauf);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbar_prio);
             this.Controls.Add(this.b_speichern);
@@ -309,6 +347,10 @@
         private System.Windows.Forms.ToolStripMenuItem notizHinzufügenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem notizLöschenToolStripMenuItem;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox tb_ablauf;
+        private System.Windows.Forms.Label l_datum;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox tb_fach;
     }
 }
 
