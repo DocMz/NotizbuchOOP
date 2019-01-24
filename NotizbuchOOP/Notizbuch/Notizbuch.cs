@@ -30,7 +30,11 @@ namespace NotizbuchOOP.Notizbuch
         }
         public void einfacheNotizRemove(int index) //Löscht Notiz aus der List an dem bestimmten Index
         {
-            this.einfacheNotizen.RemoveAt(index);
+            if(index >= 0)
+            {
+                this.einfacheNotizen.RemoveAt(index);
+
+            }
         }
         public void updateListings() //Aktualisiert die Bindings Manuell
         {

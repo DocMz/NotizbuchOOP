@@ -49,6 +49,7 @@
             this.cm_notizen = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.notizHinzufügenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notizLöschenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbar_prio)).BeginInit();
             this.cm_notizen.SuspendLayout();
@@ -210,8 +211,9 @@
             // 
             // tbar_prio
             // 
+            this.tbar_prio.LargeChange = 3;
             this.tbar_prio.Location = new System.Drawing.Point(189, 208);
-            this.tbar_prio.Maximum = 5;
+            this.tbar_prio.Maximum = 3;
             this.tbar_prio.Name = "tbar_prio";
             this.tbar_prio.Orientation = System.Windows.Forms.Orientation.Vertical;
             this.tbar_prio.Size = new System.Drawing.Size(45, 113);
@@ -239,11 +241,22 @@
             this.notizLöschenToolStripMenuItem.Text = "Löschen";
             this.notizLöschenToolStripMenuItem.Click += new System.EventHandler(this.notizLöschenToolStripMenuItem_Click);
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.label4.Location = new System.Drawing.Point(186, 192);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(42, 13);
+            this.label4.TabIndex = 23;
+            this.label4.Text = "Priorität";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 363);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.tbar_prio);
             this.Controls.Add(this.b_speichern);
             this.Controls.Add(this.label3);
@@ -295,6 +308,7 @@
         private System.Windows.Forms.ContextMenuStrip cm_notizen;
         private System.Windows.Forms.ToolStripMenuItem notizHinzufügenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem notizLöschenToolStripMenuItem;
+        private System.Windows.Forms.Label label4;
     }
 }
 
