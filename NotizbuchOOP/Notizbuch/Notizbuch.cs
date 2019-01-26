@@ -57,6 +57,14 @@ namespace NotizbuchOOP.Notizbuch
         {
             this.hausaufgaben.Remove(item);
         }
+        public void einkaufslisteAdd(DateTime datum, string titel)
+        {
+            this.einkaufzettel.Add(new Einkaufszettel(datum, titel));
+        }
+        public void einkaufslisteRemove(Einkaufszettel item)
+        {
+            this.einkaufzettel.Remove(item);
+        }
         public void updateListings() //Aktualisiert die Bindings Manuell
         {
             this.einfacheNotizen.ResetBindings();

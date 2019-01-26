@@ -16,7 +16,7 @@ namespace NotizbuchOOP.Notizbuch.Notizen
         {
             this.artikel = artikel;
             this.menge = menge;
-            this.name = artikel.bezeichung;
+            this.name = artikel.bezeichung + " - Anzahl: " + menge.ToString();
             this.preis = artikel.preis * menge;
         }
     }

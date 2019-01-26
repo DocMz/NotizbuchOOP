@@ -13,8 +13,9 @@ namespace NotizbuchOOP
 {
     public partial class Form1 : Form
     {
-        private List<Notizbuch.Notizbuch> notizenListe = new List<Notizbuch.Notizbuch>();
+        private BindingList<Notizbuch.Notizbuch> notizenListe = new BindingList<Notizbuch.Notizbuch>();
         private ArtikelContainer artikelContainer = new ArtikelContainer();
+        private Serializer serializer = new Serializer();
         private int currentNotizbuch;
 
         //0 = Notizen, 1 = Einkaufsliste, 2 = Hausaufgaben 3 = Suche
@@ -25,9 +26,18 @@ namespace NotizbuchOOP
             InitializeComponent();
 
             //Deklaration des ersten Notizbuches
-            Notizbuch.Notizbuch notizen = new Notizbuch.Notizbuch(DateTime.Now, "Notizbuch");
-            this.notizenListe.Add(notizen);
-
+            this.notizenListe = serializer.load();
+            if(notizenListe == null)
+            {
+                this.notizenListe = new BindingList<Notizbuch.Notizbuch>();
+                Notizbuch.Notizbuch notizen = new Notizbuch.Notizbuch(DateTime.Now, "Notizbuch");
+                this.notizenListe.Add(notizen);
+            }
+            this.artikelContainer = serializer.loadArtikel();
+            if(artikelContainer == null)
+            {
+                this.artikelContainer = new ArtikelContainer();
+            }
             BindingUpdate();
         }
         public void BindingUpdate()
@@ -35,6 +45,8 @@ namespace NotizbuchOOP
             //Data-Bindings
             cb_ListenAuswahl.DataSource = this.notizenListe;
             cb_ListenAuswahl.DisplayMember = "name";
+            if (currentNotizbuch == -1)
+                return;
 
             if(this.notizArt == 0) //Einfache Notiz
             {
@@ -53,8 +65,11 @@ namespace NotizbuchOOP
                 lb_notizen.DataSource = notizenListe[currentNotizbuch].einkaufzettel;
                 if (lb_notizen.SelectedIndex >= 0)
                 {
-
-                }
+                    var selectedItem = this.notizenListe[currentNotizbuch].einkaufzettel.Select(p => (Einkaufszettel)lb_notizen.SelectedItem).FirstOrDefault();
+                    tb_titel.Text = selectedItem.titel;
+                    dtp_ablauf.Value = selectedItem.datum;
+                    lb_artikel.DataSource = selectedItem.positions;
+                }   
                 einkaufslisteRender();
             }
             else if(this.notizArt == 2) { //Hausaufgaben
@@ -85,6 +100,8 @@ namespace NotizbuchOOP
 
             lb_notizen.DisplayMember = "titel";
             lb_notizen.ContextMenuStrip = cm_notizen;
+            lb_artikel.DisplayMember = "name";
+            lb_artikel.ContextMenuStrip = cm_position;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -122,6 +139,11 @@ namespace NotizbuchOOP
         }
         private void notizHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if(currentNotizbuch == -1)
+            {
+                MessageBox.Show(null, "Erstellen sie erst ein Notizbuch, bevor sie etwas hinzufügen!", "Hinzufügen fehlgeschlagen.");
+                return;
+            }
             if (notizenListe[currentNotizbuch] != null)
             {
                 if(notizArt == 0 ||notizArt == 3)
@@ -140,6 +162,14 @@ namespace NotizbuchOOP
                         count = notizenListe[currentNotizbuch].hausaufgaben.Count();
                     }
                     notizenListe[currentNotizbuch].hausaufgabeAdd("Hausaufgabe" + count, DateTime.Today);
+                } else if (notizArt == 1)
+                {
+                    int count = 0;
+                    if(notizenListe[currentNotizbuch].einkaufzettel != null)
+                    {
+                        count = notizenListe[currentNotizbuch].einkaufzettel.Count();
+                    }
+                    notizenListe[currentNotizbuch].einkaufslisteAdd(DateTime.Today, "Einkaufsliste" + count);
                 }
             }
         }
@@ -168,8 +198,13 @@ namespace NotizbuchOOP
 
             } else if(this.notizArt == 1) //Einkaufsliste
             {
-                var selectedItem = this.notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
-                int index = this.notizenListe[currentNotizbuch].einfacheNotizen.IndexOf(selectedItem);
+                var selectedItem = this.notizenListe[currentNotizbuch].einkaufzettel.Select(p => (Einkaufszettel)lb_notizen.SelectedItem).FirstOrDefault();
+                int index = this.notizenListe[currentNotizbuch].einkaufzettel.IndexOf(selectedItem);
+
+                if (index >= 0)
+                {
+                    this.notizenListe[currentNotizbuch].einkaufzettel[index] = new Einkaufszettel(dtp_ablauf.Value, tb_titel.Text, this.notizenListe[currentNotizbuch].einkaufzettel[index].positions);
+                }
 
 
             } else if (this.notizArt == 2) // Hausaufgaben
@@ -200,6 +235,10 @@ namespace NotizbuchOOP
                 {
                     var selectedItem = this.notizenListe[currentNotizbuch].hausaufgaben.Select(p => (Hausaufgabe)lb_notizen.SelectedItem).FirstOrDefault();
                     notizenListe[currentNotizbuch].hausaufgabenRemove(selectedItem);
+                } else if (notizenListe[currentNotizbuch].einkaufzettel != null && notizArt == 1)
+                {
+                    var selectedItem = this.notizenListe[currentNotizbuch].einkaufzettel.Select(p => (Einkaufszettel)lb_notizen.SelectedItem).FirstOrDefault();
+                    notizenListe[currentNotizbuch].einkaufslisteRemove(selectedItem);
                 }
                     BindingUpdate();
             }
@@ -227,7 +266,14 @@ namespace NotizbuchOOP
             tb_fach.Enabled = false;
             nud_Prio.Enabled = true;
             tbar_prio.Enabled = true;
+            b_artAdd.Enabled = false;
             dtp_ablauf.CustomFormat = "'Erstellt:' dd.MM.yy";
+            rtb_inhalt.Show();
+            lb_artikel.Hide();
+            l_artikelAnzahl.Hide();
+            l_artikelSumme.Hide();
+            tb_artikelAnzahl.Hide();
+            tb_artikelSumme.Hide();
         }
         private void hausaufgabenRender()
         {
@@ -236,7 +282,14 @@ namespace NotizbuchOOP
             tb_fach.Enabled = true;
             nud_Prio.Enabled = false;
             tbar_prio.Enabled = false;
+            b_artAdd.Enabled = false;
             dtp_ablauf.CustomFormat = "'Fällig:' dd.MM.yy";
+            rtb_inhalt.Show();
+            lb_artikel.Hide();
+            l_artikelAnzahl.Hide();
+            l_artikelSumme.Hide();
+            tb_artikelAnzahl.Hide();
+            tb_artikelSumme.Hide();
         }
         private void einkaufslisteRender()
         {
@@ -245,6 +298,13 @@ namespace NotizbuchOOP
             tb_fach.Enabled = false;
             nud_Prio.Enabled = false;
             tbar_prio.Enabled = false;
+            b_artAdd.Enabled = true;
+            rtb_inhalt.Hide();
+            lb_artikel.Show();
+            l_artikelAnzahl.Show();
+            l_artikelSumme.Show();
+            tb_artikelAnzahl.Show();
+            tb_artikelSumme.Show();
         }
 
         private void titelToolStripMenuItem_Click(object sender, EventArgs e)
@@ -276,6 +336,70 @@ namespace NotizbuchOOP
             ArtikelManager artikelManager = new ArtikelManager(artikelContainer);
             artikelManager.Show();
             this.artikelContainer = new ArtikelContainer(artikelManager.artikelContainer.artikel);
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void positionHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ArtikelAdd artikelAdd = new ArtikelAdd(artikelContainer);
+            var result = artikelAdd.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                if(this.notizenListe[currentNotizbuch].einkaufzettel.Count > 0)
+                {
+                    var selectedItem = this.notizenListe[currentNotizbuch].einkaufzettel.Select(p => (Einkaufszettel)lb_notizen.SelectedItem).FirstOrDefault();
+                    int index = this.notizenListe[currentNotizbuch].einkaufzettel.IndexOf(selectedItem);
+
+                    this.notizenListe[currentNotizbuch].einkaufzettel[index].positionAdd(artikelAdd.position);
+                    BindingUpdate();
+                } else
+                {
+                    MessageBox.Show(null, "Erstellen sie zuerst eine Einkaufslist und wählen sie diese aus.", "Keine Einkaufliste erstellt");
+                }
+            }
+        }
+
+        private void positonEntfernenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if(this.notizenListe[currentNotizbuch].einkaufzettel.Count() != 0)
+            {
+                var selectedItem = this.notizenListe[currentNotizbuch].einkaufzettel.Select(p => (Einkaufszettel)lb_notizen.SelectedItem).FirstOrDefault();
+                int index = this.notizenListe[currentNotizbuch].einkaufzettel.IndexOf(selectedItem);
+                
+                if(index >= 0)
+                {
+                    var selectedPosition = this.notizenListe[currentNotizbuch].einkaufzettel[index].positions.Select(p => (Position)lb_artikel.SelectedItem).FirstOrDefault();
+                    this.notizenListe[currentNotizbuch].einkaufzettel[index].positionRemove(selectedPosition);
+                }
+            }
+            BindingUpdate();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            serializer.save(this.notizenListe);
+            serializer.saveArtikel(this.artikelContainer);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+            this.notizenListe.Add(new Notizbuch.Notizbuch(DateTime.Today, "Notizbuch" + (this.notizenListe.Count() + (int)1)));
+            BindingUpdate();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if(this.notizenListe.Count() > 0)
+            {
+                var selectedItem = this.notizenListe.Select(p => (Notizbuch.Notizbuch)cb_ListenAuswahl.SelectedItem).FirstOrDefault();
+                this.notizenListe.Remove(selectedItem);
+            }
+
         }
     }
 }

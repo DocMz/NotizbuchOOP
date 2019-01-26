@@ -43,27 +43,36 @@
             this.rtb_inhalt = new System.Windows.Forms.RichTextBox();
             this.tb_titel = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.l_inhalt = new System.Windows.Forms.Label();
             this.b_speichern = new System.Windows.Forms.Button();
             this.tbar_prio = new System.Windows.Forms.TrackBar();
             this.cm_notizen = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.notizHinzufügenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notizLöschenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label4 = new System.Windows.Forms.Label();
-            this.l_datum = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.tb_fach = new System.Windows.Forms.TextBox();
-            this.dtp_ablauf = new System.Windows.Forms.DateTimePicker();
             this.sortierenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.titelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fachToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.prioritätToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label4 = new System.Windows.Forms.Label();
+            this.l_datum = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tb_fach = new System.Windows.Forms.TextBox();
+            this.dtp_ablauf = new System.Windows.Forms.DateTimePicker();
             this.b_artAdd = new System.Windows.Forms.Button();
             this.l_artikel = new System.Windows.Forms.Label();
+            this.lb_artikel = new System.Windows.Forms.ListBox();
+            this.l_artikelSumme = new System.Windows.Forms.Label();
+            this.tb_artikelSumme = new System.Windows.Forms.TextBox();
+            this.tb_artikelAnzahl = new System.Windows.Forms.TextBox();
+            this.l_artikelAnzahl = new System.Windows.Forms.Label();
+            this.cm_position = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.positionHinzufügenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.positonEntfernenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbar_prio)).BeginInit();
             this.cm_notizen.SuspendLayout();
+            this.cm_position.SuspendLayout();
             this.SuspendLayout();
             // 
             // cb_ListenAuswahl
@@ -126,6 +135,7 @@
             this.button4.TabIndex = 9;
             this.button4.Text = "Buch hinzufügen";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button5
             // 
@@ -135,6 +145,7 @@
             this.button5.TabIndex = 10;
             this.button5.Text = "Buch entfernen";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // lb_notizen
             // 
@@ -193,20 +204,20 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(241, 153);
+            this.label2.Location = new System.Drawing.Point(237, 153);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(27, 13);
             this.label2.TabIndex = 19;
             this.label2.Text = "Titel";
             // 
-            // label3
+            // l_inhalt
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(241, 192);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(33, 13);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "Inhalt";
+            this.l_inhalt.AutoSize = true;
+            this.l_inhalt.Location = new System.Drawing.Point(237, 192);
+            this.l_inhalt.Name = "l_inhalt";
+            this.l_inhalt.Size = new System.Drawing.Size(33, 13);
+            this.l_inhalt.TabIndex = 20;
+            this.l_inhalt.Text = "Inhalt";
             // 
             // b_speichern
             // 
@@ -251,6 +262,45 @@
             this.notizLöschenToolStripMenuItem.Text = "Löschen";
             this.notizLöschenToolStripMenuItem.Click += new System.EventHandler(this.notizLöschenToolStripMenuItem_Click);
             // 
+            // sortierenToolStripMenuItem
+            // 
+            this.sortierenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.titelToolStripMenuItem,
+            this.datumToolStripMenuItem,
+            this.fachToolStripMenuItem,
+            this.prioritätToolStripMenuItem});
+            this.sortierenToolStripMenuItem.Name = "sortierenToolStripMenuItem";
+            this.sortierenToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.sortierenToolStripMenuItem.Text = "Sortieren";
+            // 
+            // titelToolStripMenuItem
+            // 
+            this.titelToolStripMenuItem.Name = "titelToolStripMenuItem";
+            this.titelToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.titelToolStripMenuItem.Text = "Titel";
+            this.titelToolStripMenuItem.Click += new System.EventHandler(this.titelToolStripMenuItem_Click);
+            // 
+            // datumToolStripMenuItem
+            // 
+            this.datumToolStripMenuItem.Name = "datumToolStripMenuItem";
+            this.datumToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.datumToolStripMenuItem.Text = "Datum";
+            this.datumToolStripMenuItem.Click += new System.EventHandler(this.datumToolStripMenuItem_Click);
+            // 
+            // fachToolStripMenuItem
+            // 
+            this.fachToolStripMenuItem.Name = "fachToolStripMenuItem";
+            this.fachToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.fachToolStripMenuItem.Text = "Fach";
+            this.fachToolStripMenuItem.Click += new System.EventHandler(this.fachToolStripMenuItem_Click);
+            // 
+            // prioritätToolStripMenuItem
+            // 
+            this.prioritätToolStripMenuItem.Name = "prioritätToolStripMenuItem";
+            this.prioritätToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.prioritätToolStripMenuItem.Text = "Priorität";
+            this.prioritätToolStripMenuItem.Click += new System.EventHandler(this.prioritätToolStripMenuItem_Click);
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -294,45 +344,6 @@
             this.dtp_ablauf.Size = new System.Drawing.Size(146, 20);
             this.dtp_ablauf.TabIndex = 28;
             // 
-            // sortierenToolStripMenuItem
-            // 
-            this.sortierenToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.titelToolStripMenuItem,
-            this.datumToolStripMenuItem,
-            this.fachToolStripMenuItem,
-            this.prioritätToolStripMenuItem});
-            this.sortierenToolStripMenuItem.Name = "sortierenToolStripMenuItem";
-            this.sortierenToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
-            this.sortierenToolStripMenuItem.Text = "Sortieren";
-            // 
-            // titelToolStripMenuItem
-            // 
-            this.titelToolStripMenuItem.Name = "titelToolStripMenuItem";
-            this.titelToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.titelToolStripMenuItem.Text = "Titel";
-            this.titelToolStripMenuItem.Click += new System.EventHandler(this.titelToolStripMenuItem_Click);
-            // 
-            // datumToolStripMenuItem
-            // 
-            this.datumToolStripMenuItem.Name = "datumToolStripMenuItem";
-            this.datumToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.datumToolStripMenuItem.Text = "Datum";
-            this.datumToolStripMenuItem.Click += new System.EventHandler(this.datumToolStripMenuItem_Click);
-            // 
-            // fachToolStripMenuItem
-            // 
-            this.fachToolStripMenuItem.Name = "fachToolStripMenuItem";
-            this.fachToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.fachToolStripMenuItem.Text = "Fach";
-            this.fachToolStripMenuItem.Click += new System.EventHandler(this.fachToolStripMenuItem_Click);
-            // 
-            // prioritätToolStripMenuItem
-            // 
-            this.prioritätToolStripMenuItem.Name = "prioritätToolStripMenuItem";
-            this.prioritätToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.prioritätToolStripMenuItem.Text = "Priorität";
-            this.prioritätToolStripMenuItem.Click += new System.EventHandler(this.prioritätToolStripMenuItem_Click);
-            // 
             // b_artAdd
             // 
             this.b_artAdd.FlatStyle = System.Windows.Forms.FlatStyle.System;
@@ -340,7 +351,7 @@
             this.b_artAdd.Name = "b_artAdd";
             this.b_artAdd.Size = new System.Drawing.Size(146, 23);
             this.b_artAdd.TabIndex = 29;
-            this.b_artAdd.Text = "Liste öffnen";
+            this.b_artAdd.Text = "Artikelmanager";
             this.b_artAdd.UseVisualStyleBackColor = true;
             this.b_artAdd.Click += new System.EventHandler(this.b_artAdd_Click);
             // 
@@ -353,11 +364,79 @@
             this.l_artikel.TabIndex = 31;
             this.l_artikel.Text = "Artikel";
             // 
+            // lb_artikel
+            // 
+            this.lb_artikel.FormattingEnabled = true;
+            this.lb_artikel.Location = new System.Drawing.Point(240, 208);
+            this.lb_artikel.Name = "lb_artikel";
+            this.lb_artikel.Size = new System.Drawing.Size(251, 95);
+            this.lb_artikel.TabIndex = 32;
+            // 
+            // l_artikelSumme
+            // 
+            this.l_artikelSumme.AutoSize = true;
+            this.l_artikelSumme.Location = new System.Drawing.Point(367, 313);
+            this.l_artikelSumme.Name = "l_artikelSumme";
+            this.l_artikelSumme.Size = new System.Drawing.Size(42, 13);
+            this.l_artikelSumme.TabIndex = 33;
+            this.l_artikelSumme.Text = "Summe";
+            // 
+            // tb_artikelSumme
+            // 
+            this.tb_artikelSumme.Location = new System.Drawing.Point(370, 329);
+            this.tb_artikelSumme.Name = "tb_artikelSumme";
+            this.tb_artikelSumme.Size = new System.Drawing.Size(121, 20);
+            this.tb_artikelSumme.TabIndex = 34;
+            // 
+            // tb_artikelAnzahl
+            // 
+            this.tb_artikelAnzahl.Location = new System.Drawing.Point(240, 329);
+            this.tb_artikelAnzahl.Name = "tb_artikelAnzahl";
+            this.tb_artikelAnzahl.Size = new System.Drawing.Size(124, 20);
+            this.tb_artikelAnzahl.TabIndex = 36;
+            // 
+            // l_artikelAnzahl
+            // 
+            this.l_artikelAnzahl.AutoSize = true;
+            this.l_artikelAnzahl.Location = new System.Drawing.Point(237, 313);
+            this.l_artikelAnzahl.Name = "l_artikelAnzahl";
+            this.l_artikelAnzahl.Size = new System.Drawing.Size(39, 13);
+            this.l_artikelAnzahl.TabIndex = 35;
+            this.l_artikelAnzahl.Text = "Anzahl";
+            this.l_artikelAnzahl.Click += new System.EventHandler(this.label5_Click);
+            // 
+            // cm_position
+            // 
+            this.cm_position.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.positionHinzufügenToolStripMenuItem,
+            this.positonEntfernenToolStripMenuItem});
+            this.cm_position.Name = "cm_position";
+            this.cm_position.Size = new System.Drawing.Size(181, 48);
+            // 
+            // positionHinzufügenToolStripMenuItem
+            // 
+            this.positionHinzufügenToolStripMenuItem.Name = "positionHinzufügenToolStripMenuItem";
+            this.positionHinzufügenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.positionHinzufügenToolStripMenuItem.Text = "Position hinzufügen";
+            this.positionHinzufügenToolStripMenuItem.Click += new System.EventHandler(this.positionHinzufügenToolStripMenuItem_Click);
+            // 
+            // positonEntfernenToolStripMenuItem
+            // 
+            this.positonEntfernenToolStripMenuItem.Name = "positonEntfernenToolStripMenuItem";
+            this.positonEntfernenToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.positonEntfernenToolStripMenuItem.Text = "Positon entfernen";
+            this.positonEntfernenToolStripMenuItem.Click += new System.EventHandler(this.positonEntfernenToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 363);
+            this.Controls.Add(this.tb_artikelAnzahl);
+            this.Controls.Add(this.l_artikelAnzahl);
+            this.Controls.Add(this.tb_artikelSumme);
+            this.Controls.Add(this.l_artikelSumme);
+            this.Controls.Add(this.lb_artikel);
             this.Controls.Add(this.l_artikel);
             this.Controls.Add(this.b_artAdd);
             this.Controls.Add(this.dtp_ablauf);
@@ -367,7 +446,7 @@
             this.Controls.Add(this.label4);
             this.Controls.Add(this.tbar_prio);
             this.Controls.Add(this.b_speichern);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.l_inhalt);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tb_titel);
             this.Controls.Add(this.rtb_inhalt);
@@ -386,10 +465,12 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.Text = "Notizbuch";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbar_prio)).EndInit();
             this.cm_notizen.ResumeLayout(false);
+            this.cm_position.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -410,7 +491,7 @@
         private System.Windows.Forms.RichTextBox rtb_inhalt;
         private System.Windows.Forms.TextBox tb_titel;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label l_inhalt;
         private System.Windows.Forms.Button b_speichern;
         private System.Windows.Forms.TrackBar tbar_prio;
         private System.Windows.Forms.ContextMenuStrip cm_notizen;
@@ -428,6 +509,14 @@
         private System.Windows.Forms.ToolStripMenuItem prioritätToolStripMenuItem;
         private System.Windows.Forms.Button b_artAdd;
         private System.Windows.Forms.Label l_artikel;
+        private System.Windows.Forms.ListBox lb_artikel;
+        private System.Windows.Forms.Label l_artikelSumme;
+        private System.Windows.Forms.TextBox tb_artikelSumme;
+        private System.Windows.Forms.TextBox tb_artikelAnzahl;
+        private System.Windows.Forms.Label l_artikelAnzahl;
+        private System.Windows.Forms.ContextMenuStrip cm_position;
+        private System.Windows.Forms.ToolStripMenuItem positionHinzufügenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem positonEntfernenToolStripMenuItem;
     }
 }
 

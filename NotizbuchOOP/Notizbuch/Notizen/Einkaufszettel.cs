@@ -12,10 +12,25 @@ namespace NotizbuchOOP.Notizbuch.Notizen
         public DateTime datum { get; set; }
         public string titel { get; set; }
         public BindingList<Position> positions { get; set; }
-        public Einkaufszettel(DateTime datum, string titel)
+        public Einkaufszettel(DateTime datum, string titel, BindingList<Position> positions = null)
         {
             this.datum = datum;
             this.titel = titel;
+            if(positions != null)
+            {
+                this.positions = new BindingList<Position>(positions);
+            } else
+            {
+                this.positions = new BindingList<Position>();
+            }
+        }
+        public void positionAdd(Position position)
+        {
+            positions.Add(position);
+        }
+        public void positionRemove(Position item)
+        {
+            positions.Remove(item);
         }
     }
 }
