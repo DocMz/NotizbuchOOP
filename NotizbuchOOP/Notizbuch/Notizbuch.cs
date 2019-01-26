@@ -14,7 +14,9 @@ namespace NotizbuchOOP.Notizbuch
         public BindingList<Einkaufszettel> einkaufzettel { get; set; }
         public BindingList<EinfacheNotiz> einfacheNotizen { get; set; }
         public BindingList<Hausaufgabe> hausaufgaben { get; set; }
+        public BindingList<EinfacheNotiz> searchResults { get; set; }
         public string name { get; set; } //Notizbuchname
+
         public Notizbuch(DateTime datum, string name)
         {
             this.datum = datum;
@@ -23,6 +25,7 @@ namespace NotizbuchOOP.Notizbuch
             this.einfacheNotizen = new BindingList<EinfacheNotiz>();
             this.einkaufzettel = new BindingList<Einkaufszettel>();
             this.hausaufgaben = new BindingList<Hausaufgabe>();
+            this.searchResults = new BindingList<EinfacheNotiz>();
         }
         public void einfacheNotizAdd(string title) //Fügt eine einfache Notiz hinzu
         {
@@ -31,22 +34,24 @@ namespace NotizbuchOOP.Notizbuch
         public void einfacheNotizRemove(EinfacheNotiz item) //Löscht Notiz aus der List an dem bestimmten Index
         {
             this.einfacheNotizen.Remove(item);
+            this.searchResults.Remove(item);
         }
-        public IEnumerable<EinfacheNotiz> einfacheNotizFilter(int prio)
-        {
+        public void einfacheNotizFilter(int prio)
+        {   
             if (prio != 0)
             {
                 IEnumerable<EinfacheNotiz> liste = new BindingList<EinfacheNotiz>();
-                return liste = einfacheNotizen.Where(x => x.prio == prio);
-            }
-            else
-            {
-                return null;
+                liste = einfacheNotizen.Where(x => x.prio == prio);
+                searchResults.Clear();
+                foreach (EinfacheNotiz x in liste)
+                {
+                    this.searchResults.Add(x);
+                }
             }
         }
-        public void hausaufgabeAdd(string titel, string fach, DateTime ablauf)
+        public void hausaufgabeAdd(string titel, DateTime ablauf)
         {
-            this.hausaufgaben.Add(new Hausaufgabe(ablauf, titel, fach));
+            this.hausaufgaben.Add(new Hausaufgabe(ablauf, titel));
         }
         public void hausaufgabenRemove(Hausaufgabe item)
         {
@@ -58,7 +63,32 @@ namespace NotizbuchOOP.Notizbuch
             this.hausaufgaben.ResetBindings();
             this.einkaufzettel.ResetBindings();
         }
-        
-        
+        public void sortAllTitle()
+        {
+            this.einfacheNotizen = new BindingList<EinfacheNotiz>(this.einfacheNotizen.OrderBy(p => p.titel).ToList());
+            this.hausaufgaben = new BindingList<Hausaufgabe>(this.hausaufgaben.OrderBy(p => p.titel).ToList());
+            this.einkaufzettel = new BindingList<Einkaufszettel>(this.einkaufzettel.OrderBy(p => p.titel).ToList());
+            this.searchResults = new BindingList<EinfacheNotiz>(this.searchResults.OrderBy(p => p.titel).ToList());
+            updateListings();
+        }
+        public void sortAllDate()
+        {
+            this.einfacheNotizen = new BindingList<EinfacheNotiz>(this.einfacheNotizen.OrderBy(p => p.datum).ToList());
+            this.hausaufgaben = new BindingList<Hausaufgabe>(this.hausaufgaben.OrderBy(p => p.datum).ToList());
+            this.einkaufzettel = new BindingList<Einkaufszettel>(this.einkaufzettel.OrderBy(p => p.datum).ToList());
+            this.searchResults = new BindingList<EinfacheNotiz>(this.searchResults.OrderBy(p => p.datum).ToList());
+            updateListings();
+        }
+        public void sortAllSubject()
+        {
+            this.hausaufgaben = new BindingList<Hausaufgabe>(this.hausaufgaben.OrderBy(p => p.fach).ToList());
+            updateListings();
+        }
+        public void sortAllPrio()
+        {
+            this.einfacheNotizen = new BindingList<EinfacheNotiz>(this.einfacheNotizen.OrderByDescending(p => p.prio).ToList());
+            this.hausaufgaben = new BindingList<Hausaufgabe>(this.hausaufgaben.OrderBy(p => p.datum).ToList());
+            this.searchResults = new BindingList<EinfacheNotiz>(this.searchResults.OrderByDescending(p => p.prio).ToList());
+        }
     }
 }

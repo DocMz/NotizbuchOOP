@@ -12,10 +12,16 @@ namespace NotizbuchOOP.Notizbuch.Notizen
         public string titel { get; set; }
         public string[] inhalt { get; set; }
         public int prio { get; set; }
-        public EinfacheNotiz(DateTime date, string title)
+        public EinfacheNotiz(DateTime datum, string titel, int prio = 0, string[] inhalt = null)
         {
-            this.datum = date;
-            this.titel = title;
+            this.datum = datum;
+            this.titel = titel;
+            this.prio = prio;
+
+            if (inhalt != null)
+            {
+                this.inhalt = inhalt;
+            }
         }
     }
 }

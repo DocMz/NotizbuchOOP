@@ -14,6 +14,7 @@ namespace NotizbuchOOP
     public partial class Form1 : Form
     {
         private List<Notizbuch.Notizbuch> notizenListe = new List<Notizbuch.Notizbuch>();
+        private ArtikelContainer artikelContainer = new ArtikelContainer();
         private int currentNotizbuch;
 
         //0 = Notizen, 1 = Einkaufsliste, 2 = Hausaufgaben 3 = Suche
@@ -40,9 +41,11 @@ namespace NotizbuchOOP
                 lb_notizen.DataSource = notizenListe[currentNotizbuch].einfacheNotizen;
                 if(lb_notizen.SelectedIndex != -1)
                 {
-                    tb_titel.Text = this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].titel;
-                    rtb_inhalt.Lines = this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].inhalt;
-                    tbar_prio.Value = this.notizenListe[currentNotizbuch].einfacheNotizen[lb_notizen.SelectedIndex].prio;
+                    var selectedItem = this.notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
+                    tb_titel.Text = selectedItem.titel;
+                    rtb_inhalt.Lines = selectedItem.inhalt;
+                    tbar_prio.Value = selectedItem.prio;
+                    dtp_ablauf.Value = selectedItem.datum;
                 }
                 notizenRender();
             }
@@ -50,11 +53,7 @@ namespace NotizbuchOOP
                 lb_notizen.DataSource = notizenListe[currentNotizbuch].einkaufzettel;
                 if (lb_notizen.SelectedIndex >= 0)
                 {
-                    var selectedItem = this.notizenListe[currentNotizbuch].hausaufgaben.Select(p => (Hausaufgabe)lb_notizen.SelectedItem).FirstOrDefault();
-                    tb_titel.Text = selectedItem.titel;
-                    rtb_inhalt.Lines = selectedItem.inhalt;
-                    tb_ablauf.Text = selectedItem.datum.ToString();
-                    tb_fach.Text = selectedItem.fach;
+
                 }
                 einkaufslisteRender();
             }
@@ -62,27 +61,29 @@ namespace NotizbuchOOP
                 lb_notizen.DataSource = notizenListe[currentNotizbuch].hausaufgaben;
                 if (lb_notizen.SelectedIndex != -1)
                 {
-                    tb_titel.Text = this.notizenListe[currentNotizbuch].hausaufgaben[lb_notizen.SelectedIndex].titel;
-                    //rtb_inhalt.Lines = this.notizenListe[currentNotizbuch].hausaufgaben[lb_notizen.SelectedIndex].inhalt;
+                    var selectedItem = this.notizenListe[currentNotizbuch].hausaufgaben.Select(p => (Hausaufgabe)lb_notizen.SelectedItem).FirstOrDefault();
+                    tb_titel.Text = selectedItem.titel;
+                    rtb_inhalt.Lines = selectedItem.inhalt;
+                    dtp_ablauf.Value = selectedItem.datum;
+                    tb_fach.Text = selectedItem.fach;
                 }
                 hausaufgabenRender();
             }
             else if(this.notizArt == 3) //Priosuche
             {
+                lb_notizen.DataSource = this.notizenListe[currentNotizbuch].searchResults;
                 if (lb_notizen.SelectedIndex != -1)
                 {
-                    IEnumerable<EinfacheNotiz> result = this.notizenListe[currentNotizbuch].einfacheNotizFilter((int)nud_Prio.Value);
-                    lb_notizen.DataSource = new BindingSource() { DataSource = result.Count() == 0 ? this.notizenListe[currentNotizbuch].einfacheNotizen : result};
-                    if (result.Count() == 0)
-                    {
-                        nud_Prio.Value = 0;
-                    }
+                    var selectedItem = this.notizenListe[currentNotizbuch].searchResults.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
+                    tb_titel.Text = selectedItem.titel;
+                    rtb_inhalt.Lines = selectedItem.inhalt;
+                    tbar_prio.Value = selectedItem.prio;
+                    dtp_ablauf.Value = selectedItem.datum;
                 }
                 notizenRender();
             }
 
             lb_notizen.DisplayMember = "titel";
-
             lb_notizen.ContextMenuStrip = cm_notizen;
         }
 
@@ -93,6 +94,7 @@ namespace NotizbuchOOP
         private void cb_ListenAuswahl_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.currentNotizbuch = cb_ListenAuswahl.SelectedIndex;
+            this.notizArt = 0;
             BindingUpdate();
         }
 
@@ -113,7 +115,7 @@ namespace NotizbuchOOP
             this.notizArt = 2;
             BindingUpdate();
         }
-
+        
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
@@ -132,7 +134,12 @@ namespace NotizbuchOOP
                     notizenListe[currentNotizbuch].einfacheNotizAdd("Notiz" + count);
                 } else if (notizArt == 2)
                 {
-
+                    int count = 0;
+                    if(notizenListe[currentNotizbuch].hausaufgaben != null)
+                    {
+                        count = notizenListe[currentNotizbuch].hausaufgaben.Count();
+                    }
+                    notizenListe[currentNotizbuch].hausaufgabeAdd("Hausaufgabe" + count, DateTime.Today);
                 }
             }
         }
@@ -143,41 +150,37 @@ namespace NotizbuchOOP
             {
                 return;
             }
-            try
-            {
-                var selectedItem = notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
-
-                tb_titel.Text = selectedItem.titel;
-                rtb_inhalt.Lines = selectedItem.inhalt;
-                if (this.notizArt == 0 || this.notizArt == 3)
-                {
-                    tbar_prio.Value = selectedItem.prio;
-                }
-            } catch
-            {
-                    
-            }
+            BindingUpdate();
         }
 
         private void b_speichern_click(object sender, EventArgs e) //Speicherung
         {
-            if (this.notizArt == 0 || this.notizArt == 3)
+            if (this.notizArt == 0 || this.notizArt == 3) //Einfache Notiz
             {
                 var selectedItem = this.notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
                 int index = this.notizenListe[currentNotizbuch].einfacheNotizen.IndexOf(selectedItem);
 
-                this.notizenListe[currentNotizbuch].einfacheNotizen[index].titel = tb_titel.Text;
-                this.notizenListe[currentNotizbuch].einfacheNotizen[index].inhalt = rtb_inhalt.Lines;
-                this.notizenListe[currentNotizbuch].einfacheNotizen[index].prio = tbar_prio.Value;
+                if(index >= 0)
+                {
+                this.notizenListe[currentNotizbuch].einfacheNotizen[index] = new EinfacheNotiz(dtp_ablauf.Value, tb_titel.Text, tbar_prio.Value, rtb_inhalt.Lines);
+                }
+                this.notizenListe[currentNotizbuch].einfacheNotizFilter((int)nud_Prio.Value); //Nach dem Speicher die Ergebnisse aktualisieren
 
-            } else if(this.notizArt == 1)
+            } else if(this.notizArt == 1) //Einkaufsliste
             {
                 var selectedItem = this.notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
                 int index = this.notizenListe[currentNotizbuch].einfacheNotizen.IndexOf(selectedItem);
-            } else if (this.notizArt == 2)
+
+
+            } else if (this.notizArt == 2) // Hausaufgaben
             {
-                var selectedItem = this.notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
-                int index = this.notizenListe[currentNotizbuch].einfacheNotizen.IndexOf(selectedItem);
+                var selectedItem = this.notizenListe[currentNotizbuch].hausaufgaben.Select(p => (Hausaufgabe)lb_notizen.SelectedItem).FirstOrDefault();
+                int index = this.notizenListe[currentNotizbuch].hausaufgaben.IndexOf(selectedItem);
+
+                if(index >= 0)
+                {
+                    this.notizenListe[currentNotizbuch].hausaufgaben[index] = new Hausaufgabe(dtp_ablauf.Value, tb_titel.Text, tb_fach.Text, rtb_inhalt.Lines);
+                }
             }
             this.notizenListe[currentNotizbuch].updateListings();
             BindingUpdate();
@@ -191,7 +194,9 @@ namespace NotizbuchOOP
                 {   
                     var selectedItem = this.notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
                     notizenListe[currentNotizbuch].einfacheNotizRemove(selectedItem);
-                } else if (notizenListe[currentNotizbuch].hausaufgaben != null && notizArt == 2)
+                    this.notizenListe[currentNotizbuch].einfacheNotizFilter((int)nud_Prio.Value);
+                }
+                else if (notizenListe[currentNotizbuch].hausaufgaben != null && notizArt == 2)
                 {
                     var selectedItem = this.notizenListe[currentNotizbuch].hausaufgaben.Select(p => (Hausaufgabe)lb_notizen.SelectedItem).FirstOrDefault();
                     notizenListe[currentNotizbuch].hausaufgabenRemove(selectedItem);
@@ -210,9 +215,11 @@ namespace NotizbuchOOP
             else
             {
                 this.notizArt = 3; //Anzeige auf Suchen stellen
+                this.notizenListe[currentNotizbuch].einfacheNotizFilter((int)nud_Prio.Value);
             }
             BindingUpdate();
         }
+
         private void notizenRender()
         {
             b_Suchen.Enabled = true; 
@@ -220,6 +227,7 @@ namespace NotizbuchOOP
             tb_fach.Enabled = false;
             nud_Prio.Enabled = true;
             tbar_prio.Enabled = true;
+            dtp_ablauf.CustomFormat = "'Erstellt:' dd.MM.yy";
         }
         private void hausaufgabenRender()
         {
@@ -228,6 +236,7 @@ namespace NotizbuchOOP
             tb_fach.Enabled = true;
             nud_Prio.Enabled = false;
             tbar_prio.Enabled = false;
+            dtp_ablauf.CustomFormat = "'Fällig:' dd.MM.yy";
         }
         private void einkaufslisteRender()
         {
@@ -236,6 +245,37 @@ namespace NotizbuchOOP
             tb_fach.Enabled = false;
             nud_Prio.Enabled = false;
             tbar_prio.Enabled = false;
+        }
+
+        private void titelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.notizenListe[currentNotizbuch].sortAllTitle();
+            BindingUpdate();
+        }
+
+        private void datumToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.notizenListe[currentNotizbuch].sortAllDate();
+            BindingUpdate();
+        }
+
+        private void fachToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.notizenListe[currentNotizbuch].sortAllSubject();
+            BindingUpdate();
+        }
+
+        private void prioritätToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.notizenListe[currentNotizbuch].sortAllPrio();
+            BindingUpdate();
+        }
+
+        private void b_artAdd_Click(object sender, EventArgs e)
+        {
+            ArtikelManager artikelManager = new ArtikelManager(artikelContainer);
+            artikelManager.Show();
+            this.artikelContainer = new ArtikelContainer(artikelManager.artikelContainer.artikel);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace NotizbuchOOP.Notizbuch.Notizen
     {
         public DateTime datum { get; set; }
         public string titel { get; set; }
-        public Position[] positionen { get; set; }
+        public BindingList<Position> positions { get; set; }
         public Einkaufszettel(DateTime datum, string titel)
         {
             this.datum = datum;
