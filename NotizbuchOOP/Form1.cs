@@ -270,10 +270,6 @@ namespace NotizbuchOOP
             dtp_ablauf.CustomFormat = "'Erstellt:' dd.MM.yy";
             rtb_inhalt.Show();
             lb_artikel.Hide();
-            l_artikelAnzahl.Hide();
-            l_artikelSumme.Hide();
-            tb_artikelAnzahl.Hide();
-            tb_artikelSumme.Hide();
         }
         private void hausaufgabenRender()
         {
@@ -286,10 +282,6 @@ namespace NotizbuchOOP
             dtp_ablauf.CustomFormat = "'Fällig:' dd.MM.yy";
             rtb_inhalt.Show();
             lb_artikel.Hide();
-            l_artikelAnzahl.Hide();
-            l_artikelSumme.Hide();
-            tb_artikelAnzahl.Hide();
-            tb_artikelSumme.Hide();
         }
         private void einkaufslisteRender()
         {
@@ -301,10 +293,6 @@ namespace NotizbuchOOP
             b_artAdd.Enabled = true;
             rtb_inhalt.Hide();
             lb_artikel.Show();
-            l_artikelAnzahl.Show();
-            l_artikelSumme.Show();
-            tb_artikelAnzahl.Show();
-            tb_artikelSumme.Show();
         }
 
         private void titelToolStripMenuItem_Click(object sender, EventArgs e)

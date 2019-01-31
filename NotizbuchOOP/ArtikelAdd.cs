@@ -26,7 +26,8 @@ namespace NotizbuchOOP
         private void b_add_Click(object sender, EventArgs e)
         {
             var selectedItem = artikelContainer.artikel.Select(p => (Artikel)cb_artikel.SelectedItem).FirstOrDefault();
-            bool isNumber = int.TryParse(tb_anzahl.Text, out int n);
+            int n;
+            bool isNumber = int.TryParse(tb_anzahl.Text, out n);
             if(isNumber)
             {
                 this.position = new Position(selectedItem, Convert.ToInt32(tb_anzahl.Text));
@@ -47,7 +48,8 @@ namespace NotizbuchOOP
             {
                 b_add.Enabled = true;
                 var selectedItem = artikelContainer.artikel.Select(p => (Artikel)cb_artikel.SelectedItem).FirstOrDefault();
-                bool isNumber = int.TryParse(tb_anzahl.Text, out int n);
+                int n;
+                bool isNumber = int.TryParse(tb_anzahl.Text, out n);
                 if (isNumber)
                 {
                     tb_preis.Text = (selectedItem.preis * n).ToString();

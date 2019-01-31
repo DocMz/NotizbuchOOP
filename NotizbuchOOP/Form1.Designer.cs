@@ -62,10 +62,6 @@
             this.b_artAdd = new System.Windows.Forms.Button();
             this.l_artikel = new System.Windows.Forms.Label();
             this.lb_artikel = new System.Windows.Forms.ListBox();
-            this.l_artikelSumme = new System.Windows.Forms.Label();
-            this.tb_artikelSumme = new System.Windows.Forms.TextBox();
-            this.tb_artikelAnzahl = new System.Windows.Forms.TextBox();
-            this.l_artikelAnzahl = new System.Windows.Forms.Label();
             this.cm_position = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.positionHinzufügenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.positonEntfernenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -369,41 +365,8 @@
             this.lb_artikel.FormattingEnabled = true;
             this.lb_artikel.Location = new System.Drawing.Point(240, 208);
             this.lb_artikel.Name = "lb_artikel";
-            this.lb_artikel.Size = new System.Drawing.Size(251, 95);
+            this.lb_artikel.Size = new System.Drawing.Size(251, 147);
             this.lb_artikel.TabIndex = 32;
-            // 
-            // l_artikelSumme
-            // 
-            this.l_artikelSumme.AutoSize = true;
-            this.l_artikelSumme.Location = new System.Drawing.Point(367, 313);
-            this.l_artikelSumme.Name = "l_artikelSumme";
-            this.l_artikelSumme.Size = new System.Drawing.Size(42, 13);
-            this.l_artikelSumme.TabIndex = 33;
-            this.l_artikelSumme.Text = "Summe";
-            // 
-            // tb_artikelSumme
-            // 
-            this.tb_artikelSumme.Location = new System.Drawing.Point(370, 329);
-            this.tb_artikelSumme.Name = "tb_artikelSumme";
-            this.tb_artikelSumme.Size = new System.Drawing.Size(121, 20);
-            this.tb_artikelSumme.TabIndex = 34;
-            // 
-            // tb_artikelAnzahl
-            // 
-            this.tb_artikelAnzahl.Location = new System.Drawing.Point(240, 329);
-            this.tb_artikelAnzahl.Name = "tb_artikelAnzahl";
-            this.tb_artikelAnzahl.Size = new System.Drawing.Size(124, 20);
-            this.tb_artikelAnzahl.TabIndex = 36;
-            // 
-            // l_artikelAnzahl
-            // 
-            this.l_artikelAnzahl.AutoSize = true;
-            this.l_artikelAnzahl.Location = new System.Drawing.Point(237, 313);
-            this.l_artikelAnzahl.Name = "l_artikelAnzahl";
-            this.l_artikelAnzahl.Size = new System.Drawing.Size(39, 13);
-            this.l_artikelAnzahl.TabIndex = 35;
-            this.l_artikelAnzahl.Text = "Anzahl";
-            this.l_artikelAnzahl.Click += new System.EventHandler(this.label5_Click);
             // 
             // cm_position
             // 
@@ -432,10 +395,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(504, 363);
-            this.Controls.Add(this.tb_artikelAnzahl);
-            this.Controls.Add(this.l_artikelAnzahl);
-            this.Controls.Add(this.tb_artikelSumme);
-            this.Controls.Add(this.l_artikelSumme);
             this.Controls.Add(this.lb_artikel);
             this.Controls.Add(this.l_artikel);
             this.Controls.Add(this.b_artAdd);
@@ -510,10 +469,6 @@
         private System.Windows.Forms.Button b_artAdd;
         private System.Windows.Forms.Label l_artikel;
         private System.Windows.Forms.ListBox lb_artikel;
-        private System.Windows.Forms.Label l_artikelSumme;
-        private System.Windows.Forms.TextBox tb_artikelSumme;
-        private System.Windows.Forms.TextBox tb_artikelAnzahl;
-        private System.Windows.Forms.Label l_artikelAnzahl;
         private System.Windows.Forms.ContextMenuStrip cm_position;
         private System.Windows.Forms.ToolStripMenuItem positionHinzufügenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem positonEntfernenToolStripMenuItem;
