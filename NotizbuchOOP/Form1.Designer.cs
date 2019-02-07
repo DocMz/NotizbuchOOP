@@ -195,7 +195,6 @@
             this.tb_titel.Name = "tb_titel";
             this.tb_titel.Size = new System.Drawing.Size(251, 20);
             this.tb_titel.TabIndex = 18;
-            this.tb_titel.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
             // 
@@ -425,7 +424,6 @@
             this.Name = "Form1";
             this.Text = "Notizbuch";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nud_Prio)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbar_prio)).EndInit();
             this.cm_notizen.ResumeLayout(false);

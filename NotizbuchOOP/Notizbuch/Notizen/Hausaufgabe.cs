@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NotizbuchOOP.Notizbuch.Notizen
 {
+    /// <summary>
+    /// Hausaufgaben Objekt
+    /// </summary>
     class Hausaufgabe
     {
         public DateTime datum { get ; set ;}

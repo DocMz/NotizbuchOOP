@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace NotizbuchOOP.Notizbuch.Notizen
 {
+
+    /// <summary>
+    /// Einkaufszettel Objekt
+    /// </summary>
     class Einkaufszettel
     {
         public DateTime datum { get; set; }
@@ -24,10 +28,19 @@ namespace NotizbuchOOP.Notizbuch.Notizen
                 this.positions = new BindingList<Position>();
             }
         }
+        /// <summary>
+        /// Funktion um eine Position der Einkaufsliste hinzuzufügen
+        /// </summary>
+        /// <param name="position"></param>
         public void positionAdd(Position position)
         {
             positions.Add(position);
         }
+
+        /// <summary>
+        /// Funktion um eine Position aus der Einkaufsliste zu löschen.
+        /// </summary>
+        /// <param name="item"></param>
         public void positionRemove(Position item)
         {
             positions.Remove(item);

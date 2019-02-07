@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace NotizbuchOOP.Notizbuch.Notizen
 {
+    /// <summary>
+    /// Artikelobjekt
+    /// </summary>
     public class Artikel
     {
         public string bezeichung { get; set; }

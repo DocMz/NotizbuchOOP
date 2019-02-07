@@ -11,16 +11,26 @@ using System.Windows.Forms;
 
 namespace NotizbuchOOP
 {
+    /// <summary>
+    /// Artikelmanager, indem die Artikel angelegt werden können.
+    /// </summary>
     public partial class ArtikelManager : Form
     {
         public ArtikelContainer artikelContainer = new ArtikelContainer();
 
+        /// <summary>
+        /// Konstruktorfunktion
+        /// </summary>
+        /// <param name="artikelContainer">Der Hauptartikelcontainer wird der Funktion übergeben</param>
         public ArtikelManager(ArtikelContainer artikelContainer)
         {
             InitializeComponent();
             this.artikelContainer = artikelContainer;
         }
 
+        /// <summary>
+        /// Aktualisiert die Darstellung der Form
+        /// </summary>
         private void BindingUpdate()
         {
             lb_artikel.ContextMenuStrip = cm_artikel;
@@ -30,12 +40,23 @@ namespace NotizbuchOOP
             lb_artikel.DataSource = artikelContainer.artikel;
             lb_artikel.DisplayMember = "bezeichung";
         }
-
+        
+        /// <summary>
+        /// Wird ausgeführt wenn die Form das erste mal geladen wurden.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ArtikelManager_Load(object sender, EventArgs e)
         {
             BindingUpdate();
         }
 
+        /// <summary>
+        /// Event welches bei Klick auf Speichern ausgelöst wird.
+        /// Speicher Änderungen am aktuellen Artikel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void b_save_Click(object sender, EventArgs e)
         {
             if(lb_artikel.SelectedIndex >= 0)
@@ -47,11 +68,19 @@ namespace NotizbuchOOP
             BindingUpdate();
         }
 
+        /// <summary>
+        /// Event welches ausgelöst wird wenn der Index der Listbox sich verändert.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lb_artikel_SelectedIndexChanged(object sender, EventArgs e)
         {
             updateTextboxes();
         }
 
+        /// <summary>
+        /// Funktion welche den Inhalt der Textboxen aktualisiert.
+        /// </summary>
         private void updateTextboxes()
         {
             if(artikelContainer.artikel.Count > 0)
@@ -62,6 +91,12 @@ namespace NotizbuchOOP
             }
         }
 
+        /// <summary>
+        /// Funktion welche ausgeführt wird wenn man im Kontextmenü auf Artikelhinzufügen klickt.
+        /// Fügt dem Artikelcontainer eine neuen Artikel hinzu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void hinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             int count = 0;
@@ -75,6 +110,12 @@ namespace NotizbuchOOP
             BindingUpdate();
         }
 
+        /// <summary>
+        /// Funktion welche ausgelöst wird, wenn man im Kontextmenü auf Artikellöschen klickt.
+        /// Löscht den aktuell ausgewählten Artikel.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void entfernenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(lb_artikel.SelectedIndex >= 0)

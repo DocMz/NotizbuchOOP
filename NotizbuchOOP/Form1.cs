@@ -13,14 +13,24 @@ namespace NotizbuchOOP
 {
     public partial class Form1 : Form
     {
+        //Initialisiert die Notizbücher
         private BindingList<Notizbuch.Notizbuch> notizenListe = new BindingList<Notizbuch.Notizbuch>();
+
+        //Initialisiert die Artikelcontainer
         private ArtikelContainer artikelContainer = new ArtikelContainer();
+
+        //Initialisiert die Speicherfunktion
         private Serializer serializer = new Serializer();
         private int currentNotizbuch;
 
         //0 = Notizen, 1 = Einkaufsliste, 2 = Hausaufgaben 3 = Suche
         private int notizArt = 0;
 
+        /// <summary>
+        /// Konstruktorfunktion der Anwendung.
+        /// Erstellen, wenn keine Datei zum Laden vorliegt, das erste Notizbuch.
+        /// Wenn ein JSON Datei zum Laden voliegt, dann wird dies geladen und kein zusätzliches Notizbuch erstellt.
+        /// </summary>
         public Form1()
         {
             InitializeComponent();
@@ -40,9 +50,14 @@ namespace NotizbuchOOP
             }
             BindingUpdate();
         }
+
+        /// <summary>
+        /// Aktualisiert alle Listen und ihren Inhalt, sowie die Databindings.
+        /// Wird immer ausgeführt, wenn man auf eine Notiz, Liste oder Hausaufgabe klickt
+        /// </summary>
         public void BindingUpdate()
         {
-            //Data-Bindings
+            //Databinding für die Notizbücher Combobox
             cb_ListenAuswahl.DataSource = this.notizenListe;
             cb_ListenAuswahl.DisplayMember = "name";
             if (currentNotizbuch == -1)
@@ -61,7 +76,9 @@ namespace NotizbuchOOP
                 }
                 notizenRender();
             }
-            else if(this.notizArt == 1) { //Einkaufszettel
+
+            //Einkaufszettel
+            else if (this.notizArt == 1) { 
                 lb_notizen.DataSource = notizenListe[currentNotizbuch].einkaufzettel;
                 if (lb_notizen.SelectedIndex >= 0)
                 {
@@ -72,7 +89,9 @@ namespace NotizbuchOOP
                 }   
                 einkaufslisteRender();
             }
-            else if(this.notizArt == 2) { //Hausaufgaben
+
+            //Hausaufgaben
+            else if (this.notizArt == 2) { 
                 lb_notizen.DataSource = notizenListe[currentNotizbuch].hausaufgaben;
                 if (lb_notizen.SelectedIndex != -1)
                 {
@@ -84,7 +103,9 @@ namespace NotizbuchOOP
                 }
                 hausaufgabenRender();
             }
-            else if(this.notizArt == 3) //Priosuche
+
+            //Priosuche
+            else if (this.notizArt == 3) 
             {
                 lb_notizen.DataSource = this.notizenListe[currentNotizbuch].searchResults;
                 if (lb_notizen.SelectedIndex != -1)
@@ -98,16 +119,19 @@ namespace NotizbuchOOP
                 notizenRender();
             }
 
+            //Bindet die Kontextmenüs an die jeweiligen Listboxen
             lb_notizen.DisplayMember = "titel";
             lb_notizen.ContextMenuStrip = cm_notizen;
             lb_artikel.DisplayMember = "name";
             lb_artikel.ContextMenuStrip = cm_position;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
+        /// <summary>
+        /// Event welches alsgelöst wird, wenn sich der Index der Notizkombobox sich verändert.
+        /// Funktion ändert das Aktuelle Notizbuch
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cb_ListenAuswahl_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.currentNotizbuch = cb_ListenAuswahl.SelectedIndex;
@@ -115,6 +139,12 @@ namespace NotizbuchOOP
             BindingUpdate();
         }
 
+        /// <summary>
+        /// Funktionen die bei Klick auf den jeweiligen Button aufgeführt werden.
+        /// Ändern die Notizart und somit auch die Darstellung und das Verhalten der Anwendung.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
             this.notizArt = 0;
@@ -133,10 +163,12 @@ namespace NotizbuchOOP
             BindingUpdate();
         }
         
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        /// <summary>
+        /// Event welches ausgeführt wird, wenn man in dem Kontextmenü auf Hinzufügen klickt.
+        /// Funktion welche, je nach ausgewählter Art eine Notiz, Einkaufsliste oder Hausaufgabe hinzufügt.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void notizHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(currentNotizbuch == -1)
@@ -174,6 +206,12 @@ namespace NotizbuchOOP
             }
         }
 
+        /// <summary>
+        /// Event welches bei Änderung des Ausgewählten Index der lb_Notizen ausgeführt wird.
+        /// Funktion führt die BindingUpdate-Funktion aus.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lb_notizen_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lb_notizen.SelectedIndex < 0)
@@ -183,9 +221,15 @@ namespace NotizbuchOOP
             BindingUpdate();
         }
 
+        /// <summary>
+        /// Befehl der Ausgeführt wird wenn man auf Speichern klickt.
+        /// Speichert die Aktuellen Daten, welche geändert wurden in die Notiz, Einkaufsliste oder Hausaufgabe.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void b_speichern_click(object sender, EventArgs e) //Speicherung
         {
-            if (this.notizArt == 0 || this.notizArt == 3) //Einfache Notiz
+            if (this.notizArt == 0 || this.notizArt == 3) //Einfache Notizen
             {
                 var selectedItem = this.notizenListe[currentNotizbuch].einfacheNotizen.Select(p => (EinfacheNotiz)lb_notizen.SelectedItem).FirstOrDefault();
                 int index = this.notizenListe[currentNotizbuch].einfacheNotizen.IndexOf(selectedItem);
@@ -221,6 +265,12 @@ namespace NotizbuchOOP
             BindingUpdate();
         }
 
+        /// <summary>
+        /// Methode die ausgeführt wird, wenn man im Kontextmenu der lb_Notizen "Löschen" klickt.
+        /// Führt den entsprechenden Löschenbefehl für die Jeweilige Notizart aus.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void notizLöschenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (notizenListe[currentNotizbuch] != null)
@@ -245,6 +295,13 @@ namespace NotizbuchOOP
 
         }
 
+        /// <summary>
+        /// Bei klick auf den Suchen-Button wird überprüft was der Wert des NumericUpDown-Filter ist.
+        /// Wenn der Wert 0 ist, dann wird die Anzeige auf alle Notizen zurückgestellt.
+        /// Wenn der Wert größer als 0 ist, werden die Notizen mit dem entsprechenden Wert in der lb_Notizen angezeigt.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void b_Suchen_Click(object sender, EventArgs e)
         {
             if(nud_Prio.Value == 0)
@@ -259,6 +316,10 @@ namespace NotizbuchOOP
             BindingUpdate();
         }
 
+        /// <summary>
+        /// Methoden die das Userinterface verändern und so auch Eingabefehler vorbeugen. 
+        /// Es existiert jeweils eine Methode für Notizen, Hausaufgaben und Einkaufslisten.
+        /// </summary>
         private void notizenRender()
         {
             b_Suchen.Enabled = true; 
@@ -295,6 +356,11 @@ namespace NotizbuchOOP
             lb_artikel.Show();
         }
 
+        /// <summary>
+        /// Sortierfunktionen die nach dem jeweiligen Attribut sortieren. Sortiert werden alle Listen, nicht nur die Aktuelle.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void titelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.notizenListe[currentNotizbuch].sortAllTitle();
@@ -319,6 +385,12 @@ namespace NotizbuchOOP
             BindingUpdate();
         }
 
+        /// <summary>
+        /// Event welches bei Klick auf den Artikelmanager Button ausgelöst wird.
+        /// Funktion um den Artikelmanager zu öffnen.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void b_artAdd_Click(object sender, EventArgs e)
         {
             ArtikelManager artikelManager = new ArtikelManager(artikelContainer);
@@ -326,11 +398,12 @@ namespace NotizbuchOOP
             this.artikelContainer = new ArtikelContainer(artikelManager.artikelContainer.artikel);
         }
 
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Event welches bei Klick auf Position zufügen im Kontextmenü ausgeführt wird.
+        /// Öffnet die Dialog um eine Position zu erstellen und setzt die Position dann in die Liste hinein.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void positionHinzufügenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ArtikelAdd artikelAdd = new ArtikelAdd(artikelContainer);
@@ -351,6 +424,12 @@ namespace NotizbuchOOP
             }
         }
 
+        /// <summary>
+        /// Event welches bei Klick auf Position entfernen im Kontextmenü ausgeführt wird.
+        /// Löscht die Position aus der Einkaufsliste.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void positonEntfernenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if(this.notizenListe[currentNotizbuch].einkaufzettel.Count() != 0)
@@ -367,6 +446,12 @@ namespace NotizbuchOOP
             BindingUpdate();
         }
 
+        /// <summary>
+        /// Event welches ausgeführt wird wenn die Anwendung geschlossen wird.
+        /// Löst den Serialisierungsprozess aus welche alle Daten in eine JSON Datei speichert.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             serializer.save(this.notizenListe);
@@ -375,7 +460,6 @@ namespace NotizbuchOOP
 
         private void button4_Click(object sender, EventArgs e)
         {
-
             this.notizenListe.Add(new Notizbuch.Notizbuch(DateTime.Today, "Notizbuch" + (this.notizenListe.Count() + (int)1)));
             BindingUpdate();
         }
